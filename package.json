@@ -7,7 +7,6 @@
     "preview": "astro preview"
   },
   "dependencies": {
-    "@astrojs/compiler-binding-wasm32-wasi": "^0.5.1",
     "@astrojs/sitemap": "^3.7.4",
     "@fontsource/cinzel": "^5.3.0",
     "@fontsource/inter": "^5.3.0",
