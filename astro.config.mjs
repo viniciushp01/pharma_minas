@@ -13,7 +13,7 @@ const excluded = ['/404', '/politica-de-privacidade', '/faq', ...drafts] // /faq
 
 // [CONFIRMAR] domínio definitivo. Usado em canonical, sitemap e JSON-LD.
 export default defineConfig({
-  site: 'https://www.pharmaminas.com.br',
+  site: process.env.PUBLIC_SITE_URL ?? 'https://pharma-minas.vercel.app',
   trailingSlash: 'ignore',
   build: { format: 'directory' },
   integrations: [sitemap({ filter: (p) => !excluded.some((e) => new URL(p).pathname.replace(/\/$/, '') === e || p.includes('/404')) })],

@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 Disallow: /api/
 
-Sitemap: https://www.pharmaminas.com.br/sitemap-index.xml
+Sitemap: https://pharma-minas.vercel.app/sitemap-index.xml

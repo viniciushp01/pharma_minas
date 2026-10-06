@@ -5,9 +5,10 @@
 export const SITE = {
   name: 'Pharma Minas',
   tagline: 'Importação de Medicamentos',
-  legalName: 'PHARMA MINAS ASSESSORIA NA IMPORTAÇÃO DE MEDICAMENTOS LTDA',
+  legalName: 'PHARMA MINAS ASSESSORIA NA IMPORTACAO DE MEDICAMENTOS LTDA',
   cnpj: '62.024.527/0001-03',
-  url: 'https://www.pharmaminas.com.br', // [CONFIRMAR]
+  // Endereço base (canonical, sitemap e imagem de pré-visualização). Hoje: Vercel. [CONFIRMAR] trocar pelo domínio definitivo (ou definir PUBLIC_SITE_URL no build).
+  url: (import.meta.env.PUBLIC_SITE_URL as string | undefined) ?? 'https://pharma-minas.vercel.app',
   email: 'compras@pharmaminas.com.br',
   instagram: '@pharmaminas_',
   instagramUrl: 'https://www.instagram.com/pharmaminas_/',
