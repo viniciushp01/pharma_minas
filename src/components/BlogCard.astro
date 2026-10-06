@@ -1,0 +1,17 @@
+---
+import { Image } from 'astro:assets';
+import Icon from './Icon.astro';
+import type { CollectionEntry } from 'astro:content';
+interface Props { post: CollectionEntry<'blog'>; class?: string }
+const { post, class: cls = '' } = Astro.props;
+const d = post.data;
+---
+<article class={`group relative flex flex-col overflow-hidden rounded-[20px] border border-n-200 bg-n-50 ${cls}`}>
+  <Image src={d.card} alt={d.cardAlt} widths={[384, 768]} sizes="(min-width:1024px) 384px, 100vw" class="aspect-[384/200] w-full object-cover" loading="lazy" />
+  <div class="flex flex-1 flex-col gap-3 p-6">
+    <span class="chip-cat">{d.category}</span>
+    <h3 class="text-[20px] leading-[28px]"><a href={`/blog/${post.id}`} class="after:absolute after:inset-0 after:content-[''] group-hover:underline decoration-gold-500 decoration-2 underline-offset-4">{d.title}</a></h3>
+    <p class="text-sm leading-[22px] text-n-600">{d.cardSummary}</p>
+    <p class="mt-auto flex items-center gap-[6px] pt-1 text-xs leading-4 text-n-600"><Icon name="schedule" size={16} />{d.readingTime} min de leitura</p>
+  </div>
+</article>

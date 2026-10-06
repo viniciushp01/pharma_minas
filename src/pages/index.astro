@@ -1,0 +1,224 @@
+---
+import { Image } from 'astro:assets';
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
+import QuoteButton from '../components/QuoteButton.astro';
+import WhatsAppButton from '../components/WhatsAppButton.astro';
+import QuoteForm from '../components/QuoteForm.astro';
+import BlogCard from '../components/BlogCard.astro';
+import SectionTitle from '../components/SectionTitle.astro';
+import { SITE, hasWhatsApp } from '../config';
+import hero from '../assets/photos/hero.jpg';
+import quemSomos from '../assets/photos/quem-somos.jpg';
+import redeGlobal from '../assets/photos/rede-global.jpg';
+import cadeia from '../assets/photos/cadeia-termica.jpg';
+import atendimento from '../assets/photos/atendimento.jpg';
+
+const posts = (await getCollection('blog')).sort((a, b) => a.data.order - b.data.order);
+
+const pillars = [
+  { t: 'Agilidade', d: 'Processo conduzido sem perda de tempo.' },
+  { t: 'Segurança', d: 'Conformidade sanitária e fiscal.' },
+  { t: 'Conforto', d: 'Atendimento humano do início ao fim.' },
+];
+const steps = [
+  { icon: 'request_quote', t: 'Solicitação', d: 'Você informa o medicamento e envia a receita.' },
+  { icon: 'fact_check', t: 'Confirmação', d: 'Conferimos os documentos e confirmamos o pagamento.' },
+  { icon: 'currency_exchange', t: 'Pagamento internacional', d: 'Pagamento conforme as regras do Banco Central.' },
+  { icon: 'flight_takeoff', t: 'Embarque', d: 'Envio com temperatura controlada.' },
+  { icon: 'home', t: 'Entrega', d: 'Análises alfandegárias e validação ANVISA antes da entrega.' },
+];
+const focos = [
+  { icon: 'biotech', t: 'Oncologia' },
+  { icon: 'genetics', t: 'Doenças Raras' },
+  { icon: 'medical_services', t: 'Terapias Especiais' },
+];
+const difs = [
+  { icon: 'bolt', t: 'Zero burocracia', d: 'Cuidamos do processo para você focar no tratamento.' },
+  { icon: 'paid', t: 'Preço final sem taxas extras', d: 'O valor da cotação é o valor final.' },
+  { icon: 'verified', t: 'Lotes 100% originais', d: 'Produto original, com rastreabilidade.' },
+  { icon: 'policy', t: 'Autorização na ANVISA', d: 'Importação conforme a regulação.' },
+  { icon: 'account_balance', t: 'Câmbio oficial', d: 'Pagamento conforme o Banco Central.' },
+  { icon: 'thermostat', t: 'Cadeia térmica de -18°C a 8°C', d: 'Transporte com temperatura controlada e rastreada.' },
+];
+---
+<Base
+  title="Importação de Medicamentos | Pharma Minas"
+  description="Importação legal de medicamentos com acompanhamento do pedido à entrega. Oncologia, doenças raras e terapias especiais. Solicite sua cotação."
+  heroPage
+  jsonLd={[{ '@context': 'https://schema.org', '@type': 'WebSite', name: SITE.name, url: SITE.url, inLanguage: 'pt-BR' }]}
+>
+  <!-- 1 · Hero -->
+  <section id="hero" aria-labelledby="hero-title" class="on-dark relative isolate flex min-h-[100svh] items-center overflow-hidden bg-navy-900 pb-10 pt-24 lg:pt-[101px] lg:pb-0">
+    <Image src={hero} alt="Mulher idosa e o filho adulto rindo juntos no sofá de uma sala aconchegante" widths={[800, 1280, 1568]} sizes="100vw" loading="eager" fetchpriority="high" class="absolute inset-0 -z-20 h-full w-full object-cover object-[68%_center] md:object-center" />
+    <div class="absolute inset-0 -z-10 bg-navy-900/40 max-md:bg-navy-900/55" aria-hidden="true"></div>
+    <div class="container-x w-full">
+      <div class="flex max-w-[660px] flex-col gap-6">
+        <p class="font-display text-[13px] uppercase leading-[18px] tracking-[.14em] text-navy-200 md:text-sm md:leading-5">Importação de medicamentos</p>
+        <h1 id="hero-title" class="!text-white text-[30px] leading-[1.2] md:text-[48px] md:leading-[56px]">Importação de medicamentos: o tratamento que você precisa, onde quer que ele esteja</h1>
+        <p class="font-display text-[18px] leading-[27px] text-white md:text-[22px] md:leading-8">Importação legal de medicamentos, com acompanhamento humanizado do pedido à entrega.</p>
+        <div class="flex flex-col gap-3 sm:flex-row sm:gap-4">
+          <QuoteButton />
+          <WhatsAppButton />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2 · Quem somos -->
+  <section id="quem-somos" aria-labelledby="quem-somos-t" class="section bg-gold-50">
+    <div class="container-x grid items-center gap-8 lg:grid-cols-[1fr_460px] lg:gap-20">
+      <div class="flex flex-col gap-5 lg:gap-6 lg:max-w-[660px]">
+        <p class="eyebrow">Quem somos</p>
+        <h2 id="quem-somos-t" class="h2 !text-navy-900">Assessoria em importação de medicamentos, com experiência no setor farmacêutico</h2>
+        <p class="lead !text-navy-900 max-lg:!text-[15px] max-lg:!leading-6">Nossa equipe conhece o setor farmacêutico e conduz a importação com agilidade, segurança e conforto, sempre em conformidade com a legislação sanitária e fiscal.</p>
+        <ul class="grid gap-0 sm:grid-cols-3 sm:gap-6">
+          {pillars.map((p) => (
+            <li class="flex flex-col gap-[6px] border-t border-navy-900 py-4">
+              <h3 class="text-[20px] leading-7">{p.t}</h3>
+              <p class="text-sm leading-[22px] text-navy-900">{p.d}</p>
+            </li>
+          ))}
+        </ul>
+      </div>
+      <Image src={quemSomos} alt="Mão de uma pessoa idosa segurada com cuidado por duas mãos mais jovens" widths={[460, 920]} sizes="(min-width:1024px) 460px, 100vw" loading="lazy" class="order-first aspect-[460/520] w-full rounded-[20px] object-cover max-lg:aspect-[350/280] lg:order-none" />
+    </div>
+  </section>
+
+  <!-- 3 · Como funciona -->
+  <section id="como-funciona" aria-labelledby="como-t" class="section bg-n-50">
+    <div class="container-x flex flex-col gap-10 lg:gap-12">
+      <SectionTitle eyebrow="Como funciona" title="Como importar medicamentos: da solicitação à entrega em 5 etapas" text="Acompanhamos cada passo do seu pedido." class="[&_h2]:!max-w-none" />
+      <ol class="grid gap-4 sm:grid-cols-2 lg:grid-cols-5 lg:gap-6">
+        {steps.map((s, i) => (
+          <li class="card flex flex-col gap-3 p-6">
+            <div class="flex items-center gap-3">
+              <span class="icon-tile"><Icon name={s.icon} /></span>
+              <span class="font-sans text-[28px] font-bold leading-9 text-gold-800" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
+            </div>
+            <h3 class="font-sans text-base font-semibold leading-[26px] text-navy-900"><span class="sr-only">Etapa {i + 1}: </span>{s.t}</h3>
+            <p class="text-sm leading-[22px] text-n-600">{s.d}</p>
+          </li>
+        ))}
+      </ol>
+      <div class="card flex flex-col items-start justify-between gap-5 p-6 md:flex-row md:items-center">
+        <div>
+          <p class="font-semibold text-navy-900">Quer entender como funciona no seu caso?</p>
+          <p class="text-sm leading-[22px] text-n-600">A conversa inicial é sem compromisso.</p>
+        </div>
+        <WhatsAppButton class="max-md:w-full" />
+      </div>
+    </div>
+  </section>
+
+  <!-- 4 · Rede global -->
+  <section id="rede-global" aria-labelledby="rede-t" class="section bg-navy-50">
+    <div class="container-x grid items-center gap-8 lg:grid-cols-[1fr_560px] lg:gap-20">
+      <div class="flex flex-col gap-5 lg:gap-6">
+        <p class="eyebrow">Rede global</p>
+        <h2 id="rede-t" class="h2">Importação de medicamentos do exterior, com processo seguro</h2>
+        <p class="lead">Localizamos o tratamento no exterior e conduzimos a importação com segurança e conformidade, do pedido à sua porta.</p>
+        <ul class="flex flex-wrap gap-3">
+          {['Atuação internacional', 'Conforme a regulação'].map((c) => (
+            <li class="inline-flex items-center gap-2 rounded-full border border-n-200 bg-white px-4 py-2 text-[13px] font-medium leading-[18px] text-navy-800"><Icon name="check" size={16} class="text-gold-700" />{c}</li>
+          ))}
+        </ul>
+      </div>
+      <Image src={redeGlobal} alt="Mapa-múndi com linhas douradas partindo do Brasil e ligando diferentes regiões do mundo" widths={[560, 1120, 1600]} sizes="(min-width:1024px) 560px, 100vw" loading="lazy" class="aspect-[560/544] w-full rounded-[20px] object-cover max-lg:aspect-[350/260]" />
+    </div>
+  </section>
+
+  <!-- 5 · Medicamentos -->
+  <section id="medicamentos" aria-labelledby="med-t" class="section bg-white">
+    <div class="container-x grid items-center gap-8 lg:grid-cols-[520px_1fr] lg:gap-20">
+      <Image src={cadeia} alt="Câmara fria com prateleiras de aço e caixas térmicas brancas lisas" widths={[520, 1040]} sizes="(min-width:1024px) 520px, 100vw" loading="lazy" class="aspect-[520/606] w-full rounded-[20px] object-cover max-lg:aspect-[350/280]" />
+      <div class="flex flex-col gap-5 lg:gap-6">
+        <p class="eyebrow">Medicamentos</p>
+        <h2 id="med-t" class="h2">Medicamentos importados para oncologia, doenças raras e terapias especiais</h2>
+        <p class="lead">Atuamos com Oncologia, Doenças Raras e Terapias Especiais. Solicite a lista e receba atendimento personalizado.</p>
+        <ul class="flex flex-col gap-3">
+          {focos.map((f) => (
+            <li class="flex items-center gap-4 rounded-[12px] border border-n-200 bg-n-50 p-4">
+              <span class="icon-tile"><Icon name={f.icon} /></span>
+              <span class="font-sans text-base font-semibold text-navy-900">{f.t}</span>
+            </li>
+          ))}
+        </ul>
+        <div><QuoteButton label="Solicitar lista de medicamentos" icon={false} class="max-sm:w-full" /></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6 · Diferenciais -->
+  <section id="diferenciais" aria-labelledby="dif-t" class="section bg-n-50">
+    <div class="container-x flex flex-col gap-10 lg:gap-12">
+      <div class="flex flex-col gap-3">
+        <p class="eyebrow">Diferenciais</p>
+        <h2 id="dif-t" class="h2">Por que importar com a Pharma Minas</h2>
+      </div>
+      <ul class="grid gap-4 md:grid-cols-2 lg:grid-cols-3 lg:gap-6">
+        {difs.map((d) => (
+          <li class="card flex flex-col gap-4 p-6 lg:p-8">
+            <span class="icon-tile"><Icon name={d.icon} /></span>
+            <h3 class="font-sans text-xl font-bold leading-7 text-navy-900">{d.t}</h3>
+            <p>{d.d}</p>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <!-- 6b · Blog -->
+  <section id="blog" aria-labelledby="blog-t" class="section bg-white">
+    <div class="container-x flex flex-col gap-10 lg:gap-12">
+      <div class="flex flex-col justify-between gap-5 md:flex-row md:items-end">
+        <div class="flex max-w-[760px] flex-col gap-3">
+          <p class="eyebrow">Blog</p>
+          <h2 id="blog-t" class="h2">Guias sobre importação de medicamentos</h2>
+          <p class="text-sm leading-[22px]">Guias baseados em fontes oficiais e em estudos publicados, com autores e referências citados em cada artigo.</p>
+        </div>
+        <a href="/blog" class="inline-flex min-h-11 items-center gap-2 text-sm font-semibold uppercase tracking-[.04em] text-navy-900 hover:underline decoration-gold-500 decoration-2 underline-offset-[6px]">Ver todos os artigos <Icon name="arrow_forward" size={20} /></a>
+      </div>
+      <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        {posts.map((p) => <BlogCard post={p} />)}
+      </div>
+    </div>
+  </section>
+
+  <!-- 7 · CTA consultor -->
+  <section aria-labelledby="cta-t" class="section bg-gold-100">
+    <div class="container-x grid items-center gap-8 lg:grid-cols-[1fr_480px] lg:gap-20">
+      <div class="flex flex-col gap-5 lg:gap-6">
+        <p class="eyebrow">Atendimento humanizado</p>
+        <h2 id="cta-t" class="h2">Consultar no WhatsApp</h2>
+        <p class="lead">Tire suas dúvidas sobre o processo e peça sua cotação, sem compromisso.</p>
+        <div class="flex flex-col gap-3 sm:flex-row sm:gap-4">
+          <QuoteButton />
+          <WhatsAppButton />
+        </div>
+        <p class="text-xs leading-4">WhatsApp: {SITE.phoneDisplay} · <a class="underline" href={`mailto:${SITE.email}`}>{SITE.email}</a></p>
+      </div>
+      <Image src={atendimento} alt="Duas pessoas conversando à mesa em um escritório claro: uma atendente ouve um cliente com atenção" widths={[480, 960]} sizes="(min-width:1024px) 480px, 100vw" loading="lazy" class="order-first aspect-[480/320] w-full rounded-[20px] object-cover max-lg:aspect-[350/220] lg:order-none" />
+    </div>
+  </section>
+
+  <!-- 8 · Formulário -->
+  <section id="cotacao" aria-labelledby="form-t" class="section bg-n-50">
+    <div class="container-x grid gap-10 lg:grid-cols-[560px_1fr] lg:gap-20">
+      <div class="flex flex-col gap-5 lg:gap-6">
+        <p class="eyebrow">Cotação grátis</p>
+        <h2 id="form-t" class="h2">Solicite a cotação do seu medicamento</h2>
+        <p class="lead">Preencha o formulário e retornamos pelo canal que você preferir. Valores informados por orçamento, sem compromisso.</p>
+        <ul class="flex flex-col gap-3 font-semibold text-navy-900">
+          <li class="flex items-center gap-3"><Icon name="mail" size={20} class="text-gold-700" /><a href={`mailto:${SITE.email}`} class="hover:underline">{SITE.email}</a></li>
+          <li class="flex items-center gap-3"><Icon name="call" size={20} class="text-gold-700" /><span>{SITE.phoneDisplay}</span></li>
+          <li class="flex items-center gap-3"><Icon name="alternate_email" size={20} class="text-gold-700" /><a href={SITE.instagramUrl} target="_blank" rel="noopener noreferrer" class="hover:underline">{SITE.instagram}<span class="sr-only"> (abre em nova aba)</span></a></li>
+        </ul>
+      </div>
+      <div class="card p-6 sm:p-10">
+        <QuoteForm id="home" origin="home" />
+      </div>
+    </div>
+  </section>
+</Base>

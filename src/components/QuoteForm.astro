@@ -1,0 +1,89 @@
+---
+import Icon from './Icon.astro';
+import WhatsAppButton from './WhatsAppButton.astro';
+import { SITE } from '../config';
+interface Props { id: string; submitLabel?: string; twoCols?: boolean; inModal?: boolean; origin?: string }
+const { id, submitLabel = 'Enviar solicitação', twoCols = false, inModal = false, origin = 'site' } = Astro.props;
+const demo = import.meta.env.PUBLIC_FORM_DEMO === 'true';
+const row = twoCols ? 'grid gap-5 sm:grid-cols-2' : 'contents';
+---
+<div data-quote-root data-endpoint={SITE.FORM_ENDPOINT} data-demo={demo ? 'true' : 'false'}>
+  <form data-quote-form novalidate method="post" action={SITE.FORM_ENDPOINT} class="flex flex-col gap-5" aria-describedby={`${id}-status`}>
+    <input type="hidden" name="origem" value={origin} />
+    <input type="hidden" name="pagina" value="" data-field-page />
+    <input type="hidden" name="aceite_lgpd_em" value="" data-field-consent-at />
+    <input type="hidden" name="ts" value="" data-field-ts />
+    <!-- honeypot: invisível para pessoas, robôs preenchem -->
+    <div aria-hidden="true" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden">
+      <label for={`${id}-site`}>Não preencha este campo</label>
+      <input id={`${id}-site`} type="text" name="website" tabindex="-1" autocomplete="off" />
+    </div>
+
+    <div class={row}>
+      <div class="field">
+        <label for={`${id}-nome`}>Nome completo</label>
+        <input class="input" id={`${id}-nome`} name="nome" type="text" autocomplete="name" required placeholder="Digite aqui" aria-describedby={`${id}-nome-err`} />
+        <p class="field-error" id={`${id}-nome-err`} data-error-for="nome"></p>
+      </div>
+      <div class="field">
+        <label for={`${id}-email`}>E-mail</label>
+        <input class="input" id={`${id}-email`} name="email" type="email" inputmode="email" autocomplete="email" required placeholder="Digite aqui" aria-describedby={`${id}-email-err`} />
+        <p class="field-error" id={`${id}-email-err`} data-error-for="email"></p>
+      </div>
+    </div>
+    <div class={row}>
+      <div class="field">
+        <label for={`${id}-whats`}>WhatsApp com DDD</label>
+        <input class="input" id={`${id}-whats`} name="whatsapp" type="tel" inputmode="tel" autocomplete="tel-national" required placeholder="(00) 00000-0000" aria-describedby={`${id}-whats-err`} data-mask="phone" />
+        <p class="field-error" id={`${id}-whats-err`} data-error-for="whatsapp"></p>
+      </div>
+      <div class="field">
+        <label for={`${id}-med`}>Medicamento</label>
+        <input class="input" id={`${id}-med`} name="medicamento" type="text" autocomplete="off" required placeholder="Digite aqui" aria-describedby={`${id}-med-err`} />
+        <p class="field-error" id={`${id}-med-err`} data-error-for="medicamento"></p>
+      </div>
+    </div>
+
+    <fieldset class="field" aria-describedby={`${id}-rx-err`}>
+      <legend>Possui receita médica?</legend>
+      <div class="mt-2 flex gap-3">
+        <label class="pill-radio"><input type="radio" name="receita" value="sim" required /><span>Sim</span></label>
+        <label class="pill-radio"><input type="radio" name="receita" value="nao" required /><span>Não</span></label>
+      </div>
+      <p class="field-error" id={`${id}-rx-err`} data-error-for="receita"></p>
+    </fieldset>
+
+    <div class="field">
+      <label for={`${id}-msg`}>Mensagem (opcional)</label>
+      <textarea class="input" id={`${id}-msg`} name="mensagem" rows="4" maxlength="1500" placeholder="Digite aqui"></textarea>
+    </div>
+
+    <div class="field">
+      <div class="flex items-start gap-[10px]">
+        <input id={`${id}-lgpd`} name="lgpd" type="checkbox" required value="sim" class="mt-[2px] h-[18px] w-[18px] shrink-0 cursor-pointer rounded-[4px] border border-n-500 accent-navy-900" aria-describedby={`${id}-lgpd-err`} />
+        <label for={`${id}-lgpd`} class="!text-xs !font-normal !leading-4 text-n-600">Concordo com a <a href="/politica-de-privacidade" target="_blank" rel="noopener" class="underline decoration-gold-500 underline-offset-2">Política de Privacidade</a><span class="sr-only"> (abre em nova aba)</span> e com o tratamento dos meus dados de saúde (LGPD).</label>
+      </div>
+      <p class="field-error" id={`${id}-lgpd-err`} data-error-for="lgpd"></p>
+    </div>
+
+    <div id={`${id}-status`} role="status" aria-live="polite" class="sr-only" data-status></div>
+    <div data-form-error hidden role="alert" class="rounded-[12px] border border-danger bg-[#fdf1f2] p-4 text-sm text-navy-900">
+      <p class="font-semibold">Não conseguimos enviar o seu pedido agora.</p>
+      <p class="mt-1">Seus dados continuam no formulário. Tente de novo em instantes ou fale com a gente por outro canal: <a class="underline" href={`mailto:${SITE.email}`}>{SITE.email}</a>.</p>
+    </div>
+
+    <button type="submit" class="btn btn-gold w-full" data-submit>
+      <span data-submit-label>{submitLabel}</span>
+      <span data-submit-busy hidden class="inline-flex items-center gap-2"><svg class="h-5 w-5 animate-spin" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-opacity=".25" stroke-width="3"/><path d="M21 12a9 9 0 0 0-9-9" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></svg>Enviando…</span>
+    </button>
+  </form>
+
+  <div data-quote-success hidden tabindex="-1" class="flex flex-col gap-5 outline-none">
+    <div>
+      <h2 class="text-[28px] leading-[35px]" data-success-title>Recebemos o seu pedido</h2>
+      <p class="mt-[6px] text-sm text-n-600">Um atendente vai responder pelo WhatsApp ou e-mail que você informou. Enquanto isso, pode nos chamar a qualquer momento.</p>
+    </div>
+    <WhatsAppButton block />
+    {inModal && <button type="button" class="btn btn-ghost w-full" data-close-quote>Fechar</button>}
+  </div>
+</div>

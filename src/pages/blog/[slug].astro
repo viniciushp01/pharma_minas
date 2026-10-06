@@ -1,0 +1,144 @@
+---
+import { getCollection, render } from 'astro:content';
+import { Image, getImage } from 'astro:assets';
+import Base from '../../layouts/Base.astro';
+import Icon from '../../components/Icon.astro';
+import BlogCard from '../../components/BlogCard.astro';
+import QuoteButton from '../../components/QuoteButton.astro';
+import WhatsAppButton from '../../components/WhatsAppButton.astro';
+import { SITE } from '../../config';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  return posts.map((post) => ({ params: { slug: post.id }, props: { post } }));
+}
+const { post } = Astro.props;
+const d = post.data;
+const { Content, headings } = await render(post);
+const toc = [
+  ...headings.filter((h) => h.depth === 2).map((h) => ({ id: h.slug, text: h.text })),
+  { id: 'perguntas-frequentes', text: 'Perguntas frequentes' },
+  { id: 'referencias', text: 'Referências' },
+];
+const all = (await getCollection('blog')).sort((a, b) => a.data.order - b.data.order);
+const related = all.filter((p) => p.id !== post.id);
+const url = `${SITE.url}/blog/${post.id}/`;
+const cover = await getImage({ src: d.cover, width: 1200, format: 'jpg' });
+const jsonLd: object[] = [
+  {
+    '@context': 'https://schema.org', '@type': 'Article',
+    headline: d.title, description: d.metaDescription, inLanguage: 'pt-BR',
+    image: new URL(cover.src, SITE.url).toString(),
+    author: { '@type': 'Organization', name: SITE.name, url: SITE.url },
+    publisher: { '@type': 'Organization', name: SITE.name, url: SITE.url },
+    mainEntityOfPage: url,
+    ...(d.publishedAt ? { datePublished: d.publishedAt } : {}),
+    ...(d.updatedAt ? { dateModified: d.updatedAt } : {}),
+  },
+  {
+    '@context': 'https://schema.org', '@type': 'FAQPage',
+    mainEntity: d.faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a.join(' ') } })),
+  },
+  {
+    '@context': 'https://schema.org', '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Início', item: SITE.url },
+      { '@type': 'ListItem', position: 2, name: 'Blog', item: `${SITE.url}/blog/` },
+      { '@type': 'ListItem', position: 3, name: d.title, item: url },
+    ],
+  },
+];
+const fmtDate = (iso: string) => new Date(iso + 'T12:00:00').toLocaleDateString('pt-BR', { day: 'numeric', month: 'long', year: 'numeric' });
+const byline = [
+  `Publicado em ${d.publishedAt ? fmtDate(d.publishedAt) : '[data]'}`,
+  `${d.readingTime} min de leitura`,
+];
+---
+<Base title={d.seoTitle ?? `${d.title} | Pharma Minas`} description={d.metaDescription} image={cover.src} type="article" noindex={d.draft} {jsonLd}>
+  <header class="bg-white">
+    <div class="container-x flex flex-col gap-5 pb-8 pt-8 lg:pb-8 lg:pt-12">
+      <nav aria-label="Você está em" class="text-xs leading-4 text-n-600">
+        <ol class="flex flex-wrap items-center gap-x-2 gap-y-1">
+          <li><a href="/" class="hover:underline">Início</a></li><li aria-hidden="true">›</li>
+          <li><a href="/blog" class="hover:underline">Blog</a></li><li aria-hidden="true">›</li>
+          <li>{d.category}</li><li aria-hidden="true">›</li>
+          <li aria-current="page">{d.breadcrumbLabel}</li>
+        </ol>
+      </nav>
+      <span class="chip-cat">{d.category}</span>
+      <h1 class="h-display max-w-[960px]">{d.title}</h1>
+      <p class="text-sm leading-[22px] text-n-600">{byline.join('  ·  ')}</p>
+    </div>
+    <div class="container-x pb-8 lg:pb-12">
+      <Image src={d.cover} alt={d.coverAlt} widths={[640, 1200, 1514]} sizes="(min-width:1280px) 1200px, 100vw" loading="eager" fetchpriority="high" class="aspect-[1200/380] w-full rounded-[20px] object-cover max-md:aspect-[16/9]" />
+    </div>
+  </header>
+
+  <div class="container-x grid gap-8 pb-12 lg:grid-cols-[280px_1fr] lg:gap-16 lg:pb-16">
+    <aside class="lg:sticky lg:top-[125px] lg:self-start" aria-label="Neste artigo">
+      <details class="group rounded-[20px] border border-n-200 bg-n-50 p-6 max-lg:p-4" open>
+        <summary class="eyebrow flex cursor-pointer list-none items-center justify-between lg:pointer-events-none lg:cursor-default [&::-webkit-details-marker]:hidden">Neste artigo<Icon name="chevron_right" size={20} class="transition-transform group-open:rotate-90 lg:hidden" /></summary>
+        <ol class="mt-3 flex flex-col gap-3">
+          {toc.map((t) => (
+            <li><a href={`#${t.id}`} class="block text-sm leading-[22px] text-navy-900 hover:underline decoration-gold-500 underline-offset-4">{t.text}</a></li>
+          ))}
+        </ol>
+      </details>
+    </aside>
+
+    <article class="flex max-w-[856px] flex-col gap-8">
+      <div class="rounded-[20px] bg-gold-50 p-6">
+        <p class="eyebrow">Resumo</p>
+        <p class="mt-2 text-navy-900">{d.summary}</p>
+      </div>
+
+      <div class="prose-pm"><Content /></div>
+
+      <div class="flex gap-3 rounded-[12px] bg-navy-50 p-5 text-sm leading-[22px] text-navy-900" role="note">
+        <Icon name="info" size={24} class="text-gold-700" />
+        <p>{d.notice}</p>
+      </div>
+
+      <section aria-labelledby="perguntas-frequentes">
+        <h2 id="perguntas-frequentes" class="text-[28px] leading-9 scroll-mt-24">Perguntas frequentes</h2>
+        <div class="mt-5 flex flex-col gap-4">
+          {d.faq.map((f) => (
+            <div class="rounded-[12px] border border-n-200 px-6 py-5">
+              <h3 class="font-sans text-base font-semibold leading-[26px] text-navy-900">{f.q}</h3>
+              <ul class="mt-[10px] list-disc space-y-1 pl-5 marker:text-gold-700">
+                {f.a.map((a) => <li>{a}</li>)}
+              </ul>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section class="flex flex-col gap-4 rounded-[20px] bg-gold-100 p-6 sm:p-8" aria-labelledby="art-cta">
+        <h2 id="art-cta" class="text-[28px] leading-9">{d.cta.title}</h2>
+        <p>{d.cta.text}</p>
+        <div class="flex flex-col gap-3 sm:flex-row sm:gap-4"><QuoteButton /><WhatsAppButton /></div>
+      </section>
+
+      <section aria-labelledby="referencias">
+        <h2 id="referencias" class="eyebrow scroll-mt-24 !text-sm">Referências</h2>
+        <ol class="mt-3 flex flex-col gap-3 text-sm leading-[22px]">
+          {d.references.map((r) => <li>{r}</li>)}
+        </ol>
+      </section>
+    </article>
+  </div>
+  <script>
+    // No celular o índice começa recolhido; no desktop fica sempre aberto.
+    const toc = document.querySelector<HTMLDetailsElement>('aside details');
+    if (toc && window.matchMedia('(max-width: 1023px)').matches) toc.open = false;
+  </script>
+
+  <section class="section bg-n-50" aria-labelledby="leia-tambem">
+    <div class="container-x flex flex-col gap-8">
+      <h2 id="leia-tambem" class="h2">Leia também</h2>
+      <div class="grid gap-6 md:grid-cols-2">
+        {related.map((p) => <BlogCard post={p} />)}
+      </div>
+    </div>
+  </section>
+</Base>

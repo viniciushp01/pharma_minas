@@ -1,0 +1,9 @@
+---
+// Todo botão "Solicitar cotação" abre o mesmo modal (data-open-quote). Sem JS, cai na página de contato.
+interface Props { label?: string; class?: string; size?: "md" | "sm"; block?: boolean; icon?: boolean }
+import Icon from './Icon.astro';
+const { label = "Solicitar cotação", class: cls = "", size = "md", block = false, icon = false } = Astro.props;
+---
+<a href="/contato#cotacao" data-open-quote class={`btn btn-gold ${size === 'sm' ? 'btn-sm' : ''} ${block ? 'w-full' : ''} ${cls}`}>
+  {icon && <Icon name="request_quote" />} {label}
+</a>

@@ -1,0 +1,23 @@
+---
+import Icon from './Icon.astro';
+import { whatsappHref, hasWhatsApp } from '../config';
+---
+<aside aria-label="Atendimento por WhatsApp">
+<a id="wa-float" href={whatsappHref()} data-whatsapp {...(hasWhatsApp ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+   aria-label={hasWhatsApp ? 'Consultar no WhatsApp (abre em nova aba)' : 'Consultar no WhatsApp'}
+   class="fixed bottom-4 right-4 z-30 grid h-14 w-14 place-items-center rounded-full bg-wa text-navy-900 shadow-[0_6px_20px_rgba(0,24,48,.28)] transition-transform hover:scale-105 md:bottom-6 md:right-6 md:h-[60px] md:w-[60px] max-md:translate-y-24 max-md:opacity-0 max-md:data-[show=true]:translate-y-0 max-md:data-[show=true]:opacity-100">
+  <Icon name="whatsapp" size={30} />
+</a>
+</aside>
+<script>
+  // No celular o botão só aparece depois de rolar a hero (que já tem o botão de WhatsApp).
+  const el = document.getElementById('wa-float')!;
+  const hero = document.getElementById('hero');
+  const update = () => {
+    const limit = hero ? hero.offsetHeight - 80 : 0;
+    el.dataset.show = String(window.scrollY > limit);
+  };
+  el.style.transition = 'transform .25s, opacity .25s';
+  update();
+  window.addEventListener('scroll', update, { passive: true });
+</script>

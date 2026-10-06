@@ -1,0 +1,60 @@
+---
+import { Image } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
+import QuoteForm from '../components/QuoteForm.astro';
+import { SITE, hasWhatsApp, whatsappHref } from '../config';
+import atendimento from '../assets/photos/contato.jpg';
+
+const canais = [
+  { icon: 'whatsapp', label: 'WhatsApp e telefone', value: SITE.phoneDisplay, href: hasWhatsApp ? whatsappHref() : undefined },
+  { icon: 'mail', label: 'E-mail', value: SITE.email, href: `mailto:${SITE.email}` },
+  { icon: 'alternate_email', label: 'Instagram', value: SITE.instagram, href: SITE.instagramUrl },
+];
+---
+<Base
+  title="Contato e cotação de medicamento importado | Pharma Minas"
+  description="Conte qual medicamento você procura e como prefere ser atendido. Retornamos pelo WhatsApp, e-mail ou telefone."
+  jsonLd={[{ '@context': 'https://schema.org', '@type': 'ContactPage', name: 'Contato', url: `${SITE.url}/contato/` }]}
+>
+  <section class="on-dark bg-navy-900 py-12 lg:py-20" aria-labelledby="contato-h1">
+    <div class="container-x grid items-start gap-10 lg:grid-cols-[560px_1fr] lg:gap-20">
+      <div class="flex flex-col gap-5 lg:pt-4">
+        <nav aria-label="Você está em" class="text-xs leading-4 text-navy-200">
+          <ol class="flex items-center gap-2"><li><a href="/" class="underline-offset-2 hover:underline">Início</a></li><li aria-hidden="true">›</li><li aria-current="page" class="text-white">Contato</li></ol>
+        </nav>
+        <h1 id="contato-h1" class="!text-white text-[32px] leading-[1.2] md:text-[44px] md:leading-[52px]">Precisa de ajuda para trazer o seu medicamento?</h1>
+        <p class="text-lg leading-[30px] text-navy-100">Conte qual medicamento você procura e como prefere ser atendido. Retornamos pelo WhatsApp, e-mail ou telefone [prazo de resposta: CONFIRMAR].</p>
+      </div>
+      <div id="cotacao" class="scroll-mt-28 rounded-[20px] bg-white p-6 shadow-xl sm:p-10">
+        <h2 class="sr-only">Formulário de contato</h2>
+        <QuoteForm id="contato" twoCols submitLabel="Enviar mensagem" origin="contato" />
+      </div>
+    </div>
+  </section>
+
+  <section class="section bg-navy-50" aria-labelledby="canais-t">
+    <div class="container-x grid items-center gap-8 lg:grid-cols-[536px_1fr] lg:gap-16">
+      <Image src={atendimento} alt="Mulher sorrindo ao consultar o celular em sua mesa, com um caderno aberto, em um escritório claro" widths={[536, 1072]} sizes="(min-width:1024px) 536px, 100vw" loading="lazy" class="order-first aspect-[536/520] w-full rounded-[20px] object-cover max-lg:aspect-[350/240]" />
+      <div class="flex max-w-[616px] flex-col gap-5">
+        <p class="eyebrow">Atendimento</p>
+        <h2 id="canais-t" class="h2">Outros canais oficiais de atendimento</h2>
+        <p>Escolha o canal que for mais fácil para você. Horário de atendimento: {SITE.hours || '[CONFIRMAR]'}.</p>
+        <ul class="flex flex-col gap-3">
+          {canais.map((c) => (
+            <li class="flex items-center gap-4 rounded-[12px] bg-white p-4">
+              <span class="icon-tile !h-10 !w-10 !rounded-[10px] !bg-gold-50"><Icon name={c.icon} size={20} /></span>
+              <div class="flex flex-col">
+                <span class="text-xs font-medium leading-4 text-n-600">{c.label}</span>
+                {c.href
+                  ? <a href={c.href} class="font-semibold text-navy-900 hover:underline" {...(c.href.startsWith('http') ? { target: '_blank', rel: 'noopener noreferrer' } : {})}>{c.value}{c.href.startsWith('http') && <span class="sr-only"> (abre em nova aba)</span>}</a>
+                  : <span class="font-semibold text-navy-900">{c.value}</span>}
+              </div>
+            </li>
+          ))}
+        </ul>
+        <p class="text-[15px] font-medium text-navy-900">Ainda com dúvidas? <a href="/faq" class="underline decoration-gold-500 decoration-2 underline-offset-4">Veja as perguntas frequentes.</a></p>
+      </div>
+    </div>
+  </section>
+</Base>

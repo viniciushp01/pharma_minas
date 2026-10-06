@@ -1,0 +1,46 @@
+---
+import '../styles/global.css';
+import SEO from '../components/SEO.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import WhatsAppFloat from '../components/WhatsAppFloat.astro';
+import QuoteModal from '../components/QuoteModal.astro';
+import { SITE } from '../config';
+
+interface Props {
+  title: string; description: string; image?: string; noindex?: boolean; type?: 'website' | 'article';
+  jsonLd?: object[]; /** home: a hero ocupa a tela toda por baixo do header fixo */ heroPage?: boolean;
+}
+const { title, description, image, noindex, type, jsonLd = [], heroPage = false } = Astro.props;
+const org = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: SITE.name,
+  legalName: SITE.legalName,
+  url: SITE.url,
+  taxID: SITE.cnpj,
+  email: SITE.email,
+  sameAs: [SITE.instagramUrl],
+  description: 'Assessoria na importação de medicamentos, com acompanhamento do pedido à entrega.',
+};
+---
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#001830" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <SEO {title} {description} {image} {noindex} {type} jsonLd={[org, ...jsonLd]} />
+  </head>
+  <body>
+    <a href="#conteudo" class="sr-only-focusable fixed left-3 top-3 z-[60] rounded-lg bg-navy-900 px-4 py-3 text-sm font-semibold text-white">Pular para o conteúdo</a>
+    <Header />
+    <main id="conteudo" tabindex="-1" class={heroPage ? '' : 'pt-16 lg:pt-[101px]'}>
+      <slot />
+    </main>
+    <Footer />
+    <WhatsAppFloat />
+    <QuoteModal />
+  </body>
+</html>

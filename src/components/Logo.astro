@@ -1,0 +1,14 @@
+---
+import Mark from '../icons/logo-mark.svg?raw';
+interface Props { tone?: 'navy' | 'gold'; size?: 'md' | 'sm'; class?: string }
+const { tone = 'navy', size = 'md', class: cls = '' } = Astro.props;
+const markColor = 'text-gold-500';
+const textColor = tone === 'gold' ? 'text-gold-500' : 'text-navy-900';
+const mark = Mark.replace('<svg ', '<svg aria-hidden="true" class="h-full w-auto" ');
+---
+<span class={`inline-flex items-center gap-[14px] ${cls}`}>
+  <span class={`${markColor} ${size === 'sm' ? 'h-[38px]' : 'h-12'}`} set:html={mark} />
+  <span class={`font-logo font-bold leading-[1.08] ${textColor} ${size === 'sm' ? 'text-[19px]' : 'text-[24px]'}`}>
+    <span class="block">Pharma</span><span class="block">Minas</span>
+  </span>
+</span>

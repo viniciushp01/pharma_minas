@@ -1,0 +1,10 @@
+---
+import Icon from './Icon.astro';
+import { whatsappHref, hasWhatsApp } from '../config';
+interface Props { label?: string; class?: string; message?: string; block?: boolean }
+const { label = 'Consultar no WhatsApp', class: cls = '', message, block = false } = Astro.props;
+const href = whatsappHref(message);
+---
+<a href={href} class={`btn btn-wa ${block ? 'w-full' : ''} ${cls}`} data-whatsapp {...(hasWhatsApp ? { target: '_blank', rel: 'noopener noreferrer' } : {})}>
+  <Icon name="whatsapp" /> {label}{hasWhatsApp && <span class="sr-only"> (abre em nova aba)</span>}
+</a>

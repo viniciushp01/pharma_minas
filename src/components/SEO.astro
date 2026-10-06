@@ -1,0 +1,24 @@
+---
+import { SITE } from '../config';
+interface Props {
+  title: string; description: string; path?: string; image?: string; noindex?: boolean;
+  type?: 'website' | 'article'; jsonLd?: object[];
+}
+const { title, description, path = Astro.url.pathname, image = '/og-default.jpg', noindex = false, type = 'website', jsonLd = [] } = Astro.props;
+// O Apache redireciona /blog para /blog/ (pastas), então a URL canônica já usa a barra final.
+const canonical = new URL(path.endsWith('/') ? path : path + '/', SITE.url).toString();
+const imgUrl = new URL(image, SITE.url).toString();
+---
+<title>{title}</title>
+<meta name="description" content={description} />
+<link rel="canonical" href={canonical} />
+{noindex && <meta name="robots" content="noindex, nofollow" />}
+<meta property="og:type" content={type} />
+<meta property="og:site_name" content={SITE.name} />
+<meta property="og:locale" content="pt_BR" />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={canonical} />
+<meta property="og:image" content={imgUrl} />
+<meta name="twitter:card" content="summary_large_image" />
+{jsonLd.map((o) => <script type="application/ld+json" set:html={JSON.stringify(o)} />)}
