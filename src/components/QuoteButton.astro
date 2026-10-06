@@ -1,5 +1,5 @@
 ---
-// Todo botão "Solicitar cotação" abre o mesmo modal (data-open-quote). Sem JS, cai na página de contato.
+// "Solicitar cotação": na home rola até o formulário da própria página (#cotacao); nas demais páginas abre o modal (data-open-quote). Sem JS, cai em /contato#cotacao.
 interface Props { label?: string; class?: string; size?: "md" | "sm"; block?: boolean; icon?: boolean }
 import Icon from './Icon.astro';
 const { label = "Solicitar cotação", class: cls = "", size = "md", block = false, icon = false } = Astro.props;

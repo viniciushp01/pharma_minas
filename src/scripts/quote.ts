@@ -127,6 +127,17 @@ if (dlg) {
     const t = (e.target as HTMLElement).closest<HTMLElement>('[data-open-quote]');
     if (!t) return;
     e.preventDefault();
+    // Na home o CTA leva ao formulário da própria página; nas outras páginas abre o modal.
+    const isHome = location.pathname.replace(/\/+$/, '') === '';
+    const inline = isHome ? document.getElementById('cotacao') : null;
+    if (inline) {
+      const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+      inline.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
+      history.replaceState(null, '', '#cotacao');
+      const field = inline.querySelector<HTMLElement>('input[name="nome"]');
+      window.setTimeout(() => field?.focus({ preventScroll: true }), reduce ? 0 : 600);
+      return;
+    }
     open(t);
   });
   if (location.hash === '#solicitar-cotacao') open();
