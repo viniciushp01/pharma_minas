@@ -1,94 +1,20 @@
 # Pharma Minas — Website Institucional
 
-[![Astro](https://img.shields.io/badge/Astro-v7.3-FF5D01?style=flat-square&logo=astro&logoColor=white)](https://astro.build)
-[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-v4-38B2AC?style=flat-square&logo=tailwind-css&logoColor=white)](https://tailwindcss.com)
-[![TypeScript](https://img.shields.io/badge/TypeScript-5.0+-3178C6?style=flat-square&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
-[![License](https://img.shields.io/badge/License-Proprietary-gray?style=flat-square)](#)
+[![Astro](https://img.shields.io/badge/Astro-v7.3-FF5D01?style=for-the-badge&logo=astro&logoColor=white)](https://astro.build)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-v4-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.0+-3178C6?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![PHP](https://img.shields.io/badge/PHP-777BB4?style=for-the-badge&logo=php&logoColor=white)](https://www.php.net/)
 
 Website institucional da **Pharma Minas**, especializado em importação e distribuição legal de medicamentos especiais, terapias oncológicas e tratamentos para doenças raras.
 
 ---
 
-## 🚀 Tecnologias
+## 🛠️ Tecnologias Utilizadas
 
-- **Framework**: [Astro 7](https://astro.build/) (Geração de Site Estático / SSG)
-- **Estilização**: [Tailwind CSS v4](https://tailwindcss.com/)
-- **Linguagem**: TypeScript & JavaScript Vanilla
-- **Tipografia**: Cinzel, Marcellus e Inter via `@fontsource`
-- **Ícones**: `@material-symbols/svg-400`
-- **Backend / API**: PHP para processamento de cotações em servidores compatíveis com cPanel/Apache
-
----
-
-## 📦 Como Rodar Localmente
-
-### Pré-requisitos
-- Node.js 18+ ou superior
-- NPM instalado
-
-### Instalação e Execução
-
-```bash
-# 1. Instalar dependências
-npm install
-
-# 2. Iniciar o servidor de desenvolvimento
-npm run dev
-# Acesse: http://localhost:4321
-
-# 3. Gerar build de produção
-npm run build
-# Os arquivos estáticos otimizados serão gerados na pasta dist/
-```
-
-> **Nota para Windows (Smart App Control):** Caso ocorra erro de carregamento do compilador nativo, a dependência WASI `@astrojs/compiler-binding-wasm32-wasi` já está configurada no projeto como fallback automático.
-
----
-
-## 🌐 Publicação no cPanel / Hospedagem
-
-1. Execute o build:
-   ```bash
-   npm run build
-   ```
-2. Acesse a pasta `dist/` gerada.
-3. Envie **todo o conteúdo** de `dist/` para a pasta raiz da hospedagem (ex: `public_html/`) via Gerenciador de Arquivos ou FTP.
-4. O arquivo `.htaccess` (com regras de HTTPS obrigatório, cache, headers de segurança e página 404) e a API PHP (`api/cotacao.php`) são incluídos automaticamente no build.
-
-> **Modo Demo em Reuniões:**  
-> Para testar o formulário simulando envio com sucesso sem disparar e-mails, execute:  
-> `PUBLIC_FORM_DEMO=true npm run build` *(Atenção: nunca publicar em produção dessa forma)*.
-
----
-
-## 📁 Estrutura e Onde Customizar
-
-| O que você quer alterar | Arquivo / Diretório | Descrição |
-|---|---|---|
-| **Informações de Contato** | [`src/config.ts`](src/config.ts) | WhatsApp, e-mail, endereço, horário e domínio centralizados |
-| **Página Principal (Home)** | [`src/pages/index.astro`](src/pages/index.astro) | Seções, textos principais, chamadas e diferenciais |
-| **Artigos do Blog** | [`src/content/blog/*.md`](src/content/blog/) | Artigos em Markdown (metadados e corpo) |
-| **Páginas Institucionais** | [`src/pages/`](src/pages/) | `contato.astro`, `faq.astro`, `politica-de-privacidade.astro` |
-| **Fotos e Imagens** | [`src/assets/photos/`](src/assets/photos/) | Imagens do site (otimizadas automaticamente para WebP) |
-| **Componentes Globais** | [`src/components/`](src/components/) | Header, Footer, Botão flutuante WhatsApp, Modais |
-| **Formulário de Cotação** | [`src/components/QuoteForm.astro`](src/components/QuoteForm.astro) e [`src/scripts/quote.ts`](src/scripts/quote.ts) | Validação de formulários e estados |
-
----
-
-## ⚙️ Regras de Negócio e Configurações
-
-- **Comportamento do WhatsApp:**
-  - Se `WHATSAPP_NUMBER` em `src/config.ts` estiver em branco, todos os botões de WhatsApp redirecionam suavemente para o formulário de cotação (`/contato#cotacao`).
-  - Ao preencher o número com DDD (ex: `5531999999999`), os botões passam a abrir diretamente o chat no WhatsApp (`wa.me`).
-- **Artigos e Rascunhos:**
-  - Artigos com `draft: true` exibem selo de rascunho e são protegidos com tag `noindex` (fora do sitemap).
-  - Após revisão médica/técnica, altere para `draft: false` e preencha a data de publicação definitiva.
-
----
-
-## 📋 Checklist Pré-Lançamento
-
-- [ ] Atualizar dados reais em `src/config.ts` (telefone, e-mail, CNPJ e endereço)
-- [ ] Configurar envio de e-mail por SMTP em `public/api/cotacao.php`
-- [ ] Revisão técnica e jurídica dos textos, artigos e da Política de Privacidade
-- [ ] Conectar ao Google Search Console e enviar sitemap (`/sitemap-index.xml`)
+- **[Astro](https://astro.build/) (v7.3)** — Framework web para geração de sites estáticos (SSG) de alta performance.
+- **[Tailwind CSS](https://tailwindcss.com/) (v4)** — Framework CSS utility-first para estilização moderna e responsiva.
+- **[TypeScript](https://www.typescriptlang.org/) & JavaScript** — Linguagens utilizadas para tipagem estática e lógica dos componentes.
+- **[Fontsource](https://fontsource.org/)** — Gerenciamento de tipografia self-hosted (*Cinzel*, *Marcellus* e *Inter*).
+- **[Material Symbols](https://fonts.google.com/icons)** — Biblioteca de ícones vetoriais em SVG (`@material-symbols/svg-400`).
+- **[Sharp](https://sharp.pixelplumbing.com/)** — Processamento e otimização automatizada de imagens para formato WebP.
+- **PHP** — Backend para processamento e validação de solicitações de cotação em ambiente Apache/cPanel.
