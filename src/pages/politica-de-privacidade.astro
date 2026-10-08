@@ -2,52 +2,51 @@
 import Base from '../layouts/Base.astro';
 import { SITE } from '../config';
 ---
-<Base title="Política de Privacidade (LGPD) | Pharma Minas" description="Como a Pharma Minas trata os dados pessoais e de saúde informados nos formulários do site." noindex>
+<Base title="Política de Privacidade (LGPD) | Pharma Minas" description="Como a Pharma Minas trata os dados pessoais e de saúde informados nos formulários do site.">
   <section class="bg-tint py-14 lg:py-24">
     <div class="container-x flex flex-col gap-4">
       <p class="eyebrow eyebrow-line">Legal</p>
       <h1 class="h-display">Política de Privacidade</h1>
-      <p class="rounded-[12px] border border-gold-500 bg-warm p-4 text-sm text-ink" role="note"><strong>Rascunho para revisão jurídica.</strong> Este texto descreve o funcionamento atual do site e precisa ser validado por um profissional de proteção de dados antes da publicação. Itens marcados com [CONFIRMAR] dependem de informação da empresa.</p>
     </div>
   </section>
   <section class="bg-page py-[72px] lg:py-36">
     <div data-reveal class="container-x">
       <div class="prose-pm max-w-[760px]">
         <h2>1. Quem é o controlador dos dados</h2>
-        <p>{SITE.legalName}, CNPJ {SITE.cnpj}. Contato para assuntos de privacidade: <a href={`mailto:${SITE.email}`}>{SITE.email}</a>. Encarregado (DPO): [CONFIRMAR nome e contato].</p>
+        <p>A {SITE.legalName}, inscrita no CNPJ {SITE.cnpj}, com sede na Av. Augusto de Lima, 1376, Loja A, Barro Preto, Belo Horizonte/MG, é a responsável pelas decisões sobre o tratamento dos dados pessoais coletados neste site. Dúvidas sobre privacidade podem ser enviadas para <a href={`mailto:${SITE.email}`}>{SITE.email}</a>.</p>
 
         <h2>2. Quais dados coletamos</h2>
-        <p>Quando você envia o formulário de cotação ou de contato, coletamos: nome completo, e-mail, WhatsApp com DDD, nome do medicamento procurado, a informação se você possui receita médica e a mensagem que decidir escrever. Também registramos a data e a hora do seu aceite a esta política e a página em que o formulário foi enviado.</p>
-        <p>O nome do medicamento e a existência de receita podem revelar informação sobre a sua saúde. A LGPD trata esses dados como <strong>dados pessoais sensíveis</strong>, e por isso pedimos o seu consentimento específico antes do envio.</p>
+        <p>Ao preencher o formulário de cotação ou de contato, você nos informa: nome completo, e-mail, número de WhatsApp com DDD, nome do medicamento que procura, se possui receita médica e a mensagem que quiser escrever. Guardamos também a data e a hora em que você aceitou esta política e a página do site em que o formulário foi enviado.</p>
+        <p>Como o nome de um medicamento e a existência de receita podem indicar algo sobre a sua saúde, esses dados são considerados <strong>dados pessoais sensíveis</strong> pela LGPD. Por isso, solicitamos o seu consentimento específico antes de cada envio.</p>
 
         <h2>3. Para que usamos os dados</h2>
         <ul>
-          <li>Responder ao seu pedido e elaborar a cotação do medicamento.</li>
-          <li>Entrar em contato com você pelo WhatsApp, e-mail ou telefone informados.</li>
-          <li>Cumprir obrigações legais e regulatórias ligadas à importação, quando você contratar o serviço.</li>
+          <li>Responder ao seu contato e preparar a cotação do medicamento.</li>
+          <li>Falar com você pelo WhatsApp, e-mail ou telefone que informou.</li>
+          <li>Cumprir obrigações legais e regulatórias da importação, caso você contrate o serviço.</li>
         </ul>
-        <p>Não usamos esses dados para publicidade de terceiros e não os vendemos.</p>
+        <p>Seus dados não são usados para publicidade de terceiros nem são comercializados.</p>
 
         <h2>4. Base legal</h2>
-        <p>Consentimento do titular (LGPD, art. 7º, I, e art. 11, I, para dados sensíveis) e, quando houver contratação, execução de contrato e procedimentos preliminares a pedido do titular. [CONFIRMAR enquadramento com o jurídico]</p>
+        <p>O tratamento se baseia no seu consentimento (LGPD, art. 7º, I, e art. 11, I, no caso de dados sensíveis) e, se você contratar o nosso serviço, na execução do contrato e nos procedimentos preliminares solicitados por você.</p>
 
         <h2>5. Com quem compartilhamos</h2>
-        <p>Somente com quem é necessário para atender ao seu pedido, como parceiros logísticos e de importação, instituições financeiras e autoridades, quando exigido por lei. Os dados também são tratados pelos prestadores de hospedagem e de e-mail que mantêm o site. [CONFIRMAR lista de operadores]</p>
+        <p>Compartilhamos dados apenas na medida necessária para atender ao seu pedido, com parceiros logísticos e de importação, instituições financeiras e autoridades, quando a lei exigir. Também têm acesso aos dados os prestadores de hospedagem e de e-mail que sustentam o funcionamento do site. Não vendemos nem cedemos seus dados a terceiros para fins comerciais.</p>
 
         <h2>6. Por quanto tempo guardamos</h2>
-        <p>Pelo tempo necessário para atender ao pedido e cumprir obrigações legais. Prazo de retenção: [CONFIRMAR]. Depois disso, os dados são eliminados ou anonimizados.</p>
+        <p>Mantemos os dados pelo período necessário para atender ao seu pedido e cumprir obrigações legais. Depois disso, eles são eliminados ou anonimizados.</p>
 
         <h2>7. Seus direitos</h2>
-        <p>Você pode pedir confirmação do tratamento, acesso, correção, anonimização, portabilidade, eliminação dos dados tratados com consentimento, informação sobre compartilhamento e a revogação do consentimento, conforme o art. 18 da LGPD. Escreva para <a href={`mailto:${SITE.email}`}>{SITE.email}</a>. Você também pode reclamar à Autoridade Nacional de Proteção de Dados (ANPD).</p>
+        <p>Conforme o art. 18 da LGPD, você pode solicitar a confirmação de que tratamos seus dados, o acesso a eles, a correção, a anonimização, a portabilidade, a eliminação dos dados tratados com base em consentimento, informações sobre o compartilhamento e a revogação do consentimento. Basta escrever para <a href={`mailto:${SITE.email}`}>{SITE.email}</a>. Você também pode apresentar reclamação à Autoridade Nacional de Proteção de Dados (ANPD).</p>
 
         <h2>8. Segurança</h2>
-        <p>O site usa conexão segura (HTTPS) e os dados enviados pelos formulários são validados no servidor. Adotamos medidas técnicas e administrativas para proteger as informações contra acesso não autorizado. [CONFIRMAR medidas finais após definir o recebimento dos formulários]</p>
+        <p>Este site usa conexão segura (HTTPS) e os dados enviados pelos formulários passam por validação no servidor. Adotamos medidas técnicas e administrativas razoáveis para proteger as informações contra acesso não autorizado, uso indevido ou divulgação.</p>
 
-        <h2>9. Cookies e analytics</h2>
-        <p>Neste momento o site não usa cookies de publicidade. Se ferramentas de medição (como o Google Analytics ou o Search Console) forem ativadas, esta seção será atualizada e, quando necessário, será pedido o seu consentimento. [CONFIRMAR]</p>
+        <h2>9. Links para outros sites</h2>
+        <p>Este site pode conter links para páginas de terceiros, como o nosso perfil no Instagram. Esta política não se aplica a esses endereços, e recomendamos que você leia a política de privacidade de cada um deles.</p>
 
         <h2>10. Atualizações</h2>
-        <p>Podemos atualizar esta política. A data da última revisão aparecerá aqui: [CONFIRMAR].</p>
+        <p>Esta política pode ser atualizada de tempos em tempos. Quando houver mudanças relevantes, publicaremos a nova versão nesta página. Última atualização: 8 de outubro de 2026.</p>
       </div>
     </div>
   </section>

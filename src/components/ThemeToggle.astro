@@ -1,7 +1,7 @@
 ---
 // Alterna entre tema claro e escuro (componente "Toggle de tema" do Figma).
 // <button role="switch">: aria-checked = tema escuro ligado. O estado é salvo em localStorage ("pm-theme").
-// Na primeira visita vale a preferência do sistema (prefers-color-scheme).
+// Padrão: tema escuro. O claro só vale quando a pessoa escolhe no botão.
 import Icon from './Icon.astro';
 interface Props { class?: string }
 const { class: cls = '' } = Astro.props;
@@ -24,11 +24,8 @@ const { class: cls = '' } = Astro.props;
     document.querySelector('meta[name="theme-color"]')?.setAttribute('content', dark ? COLORS.dark : COLORS.light);
   }
   function save(dark: boolean) { try { localStorage.setItem(KEY, dark ? 'dark' : 'light'); } catch { /* modo privado: segue sem salvar */ } }
-  function stored(): string | null { try { return localStorage.getItem(KEY); } catch { return null; } }
   paint(root.classList.contains('dark'));
   toggles.forEach((t) => t.addEventListener('click', () => { const dark = !root.classList.contains('dark'); paint(dark); save(dark); }));
-  // sem escolha salva, acompanha o sistema
-  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => { if (!stored()) paint(e.matches); });
   // outras abas
   window.addEventListener('storage', (e) => { if (e.key === KEY && e.newValue) paint(e.newValue === 'dark'); });
 </script>

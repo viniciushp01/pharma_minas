@@ -25,19 +25,17 @@ const org = {
 };
 ---
 <!doctype html>
-<html lang="pt-BR">
+<html lang="pt-BR" class="dark">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="color-scheme" content="light dark" />
-    <meta name="theme-color" content="#ffffff" />
-    <!-- anti-flash: aplica o tema salvo (ou o do sistema) antes da primeira pintura -->
+    <meta name="theme-color" content="#000c18" />
+    <!-- anti-flash: o site abre no tema escuro; só fica claro se a pessoa escolheu o claro no botão -->
     <script is:inline>
       (function () {
         try {
-          var t = localStorage.getItem('pm-theme');
-          var dark = t ? t === 'dark' : window.matchMedia('(prefers-color-scheme: dark)').matches;
-          if (dark) document.documentElement.classList.add('dark');
+          if (localStorage.getItem('pm-theme') === 'light') document.documentElement.classList.remove('dark');
         } catch (e) {}
         // Movimento: entrada das seções só quando o usuário não pediu menos animação (sem JS, tudo fica visível)
         try { if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentElement.classList.add('reveal-ready'); } catch (e) {}

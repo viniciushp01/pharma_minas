@@ -12,7 +12,7 @@ card: ../../assets/photos/blog-como-importar.jpg
 cardAlt: 'Homem de perfil lendo algo no notebook, em um escritório em casa com luz natural'
 cover: ../../assets/photos/capa-como-importar.jpg
 coverAlt: 'Mesa com receita médica ilegível, caixa e cartela lisas, envelope de courier, óculos e caneta'
-notice: 'Conteúdo informativo, baseado nas fontes citadas, cujas regras podem ser atualizadas. Não substitui a orientação do seu médico. [CONFIRMAR texto com o jurídico]'
+notice: 'Conteúdo informativo, baseado nas fontes citadas, cujas regras podem ser atualizadas. Não substitui a orientação do seu médico.'
 cta:
   title: 'Quer conhecer o nosso processo antes de decidir?'
   text: 'Tire suas dúvidas pelo WhatsApp, sem compromisso.'
@@ -28,7 +28,7 @@ faq:
   - q: 'Existe limite de valor?'
     a:
       - 'Para remessas postais ou expressas, a Receita Federal aplica alíquota de 0% de imposto de importação em medicamentos de até US$ 10.000.'
-      - 'Valores acima disso podem seguir outras regras de tributação. [CONFIRMAR com a Receita Federal]'
+      - 'Valores acima disso podem seguir outras regras de tributação.'
   - q: 'Posso importar para outra pessoa da família?'
     a:
       - 'Sim: a Receita Federal inclui o familiar que importa para tratar outro membro da família.'

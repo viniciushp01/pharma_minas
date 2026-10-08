@@ -202,7 +202,7 @@ const difs = [
           <QuoteButton />
           <WhatsAppButton variant="outline" />
         </div>
-        <p class="text-xs leading-4">WhatsApp: {SITE.phoneDisplay} · <a class="underline" href={`mailto:${SITE.email}`}>{SITE.email}</a></p>
+        <p class="text-xs leading-4">Telefone: <a class="underline" href={SITE.phoneHref}>{SITE.phone}</a> · <a class="underline" href={`mailto:${SITE.email}`}>{SITE.email}</a></p>
       </div>
       <div class="photo order-first aspect-[480/320] w-full max-lg:aspect-[350/220] lg:order-none">
         <Image src={atendimento} alt="Duas pessoas conversando à mesa em um escritório claro: uma atendente ouve um cliente com atenção" widths={[480, 960]} sizes="(min-width:1024px) 480px, 100vw" loading="lazy" />
@@ -219,8 +219,8 @@ const difs = [
         <p class="lead">Preencha o formulário e retornamos pelo canal que você preferir. Valores informados por orçamento, sem compromisso.</p>
         <ul class="flex flex-col gap-3 font-semibold text-ink">
           <li class="flex items-center gap-3"><Icon name="mail" size={20} class="text-icon-accent" /><a href={`mailto:${SITE.email}`} class="hover:underline">{SITE.email}</a></li>
-          <li class="flex items-center gap-3"><Icon name="call" size={20} class="text-icon-accent" /><span>{SITE.phoneDisplay}</span></li>
-          <li class="flex items-center gap-3"><Icon name="alternate_email" size={20} class="text-icon-accent" /><a href={SITE.instagramUrl} target="_blank" rel="noopener noreferrer" class="hover:underline">{SITE.instagram}<span class="sr-only"> (abre em nova aba)</span></a></li>
+          <li class="flex items-center gap-3"><Icon name="call" size={20} class="text-icon-accent" /><a href={SITE.phoneHref} class="hover:underline">{SITE.phone}</a></li>
+          <li class="flex items-center gap-3"><Icon name="instagram" size={20} class="text-icon-accent" /><a href={SITE.instagramUrl} target="_blank" rel="noopener noreferrer" class="hover:underline">{SITE.instagram}<span class="sr-only"> (abre em nova aba)</span></a></li>
         </ul>
       </div>
       <div class="card p-6 sm:p-10">

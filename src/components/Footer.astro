@@ -15,16 +15,16 @@ import { SITE, hasWhatsApp } from '../config';
         <a class="flex items-center gap-3 text-sm hover:text-white" href={`mailto:${SITE.email}`}><Icon name="mail" size={20} class="text-gold-400" />{SITE.email}</a>
         <p class="flex items-center gap-3 text-sm">
           <Icon name="call" size={20} class="text-gold-400" />
-          {hasWhatsApp ? <a class="hover:text-white" href={`tel:+${SITE.WHATSAPP_NUMBER}`}>{SITE.phoneDisplay}</a> : <span>{SITE.phoneDisplay}</span>}
+          <a class="hover:text-white" href={SITE.phoneHref}>{SITE.phone}</a>
         </p>
-        <a class="flex items-center gap-3 text-sm hover:text-white" href={SITE.instagramUrl} target="_blank" rel="noopener noreferrer"><Icon name="alternate_email" size={20} class="text-gold-400" />{SITE.instagram}<span class="sr-only"> (abre em nova aba)</span></a>
+        <a class="flex items-center gap-3 text-sm hover:text-white" href={SITE.instagramUrl} target="_blank" rel="noopener noreferrer"><Icon name="instagram" size={20} class="text-gold-400" />{SITE.instagram}<span class="sr-only"> (abre em nova aba)</span></a>
       </div>
       <div class="flex flex-col gap-[10px] text-sm">
         <h2 class="font-sans text-xs font-bold uppercase tracking-[.06em] text-gold-400">Dados da empresa</h2>
         <p>{SITE.legalName}</p>
         <p>CNPJ: {SITE.cnpj}</p>
-        <p>Endereço: {SITE.address || '[CONFIRMAR]'}</p>
-        <p>Horário: {SITE.hours || '[CONFIRMAR]'}</p>
+        <p>Endereço: {SITE.address}</p>
+        <p>Horário: {SITE.hours}</p>
       </div>
       <div class="flex flex-col gap-[10px] text-sm">
         <h2 class="font-sans text-xs font-bold uppercase tracking-[.06em] text-gold-400">Legal</h2>

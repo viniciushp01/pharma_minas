@@ -7,9 +7,9 @@ import { SITE, hasWhatsApp, whatsappHref } from '../config';
 import atendimento from '../assets/photos/contato.jpg';
 
 const canais = [
-  { icon: 'whatsapp', label: 'WhatsApp e telefone', value: SITE.phoneDisplay, href: hasWhatsApp ? whatsappHref() : undefined },
+  { icon: 'call', label: 'Telefone', value: SITE.phone, href: SITE.phoneHref },
   { icon: 'mail', label: 'E-mail', value: SITE.email, href: `mailto:${SITE.email}` },
-  { icon: 'alternate_email', label: 'Instagram', value: SITE.instagram, href: SITE.instagramUrl },
+  { icon: 'instagram', label: 'Instagram', value: SITE.instagram, href: SITE.instagramUrl },
 ];
 ---
 <Base
@@ -24,7 +24,7 @@ const canais = [
           <ol class="flex items-center gap-2"><li><a href="/" class="underline-offset-2 hover:underline">Início</a></li><li aria-hidden="true">›</li><li aria-current="page" class="text-white">Contato</li></ol>
         </nav>
         <h1 id="contato-h1" class="!text-white text-[32px] leading-[40px] lg:text-[56px] lg:leading-[64px]">Precisa de ajuda para trazer o seu medicamento?</h1>
-        <p class="text-lg leading-[30px] text-navy-100">Conte qual medicamento você procura e como prefere ser atendido. Retornamos pelo WhatsApp, e-mail ou telefone [prazo de resposta: CONFIRMAR].</p>
+        <p class="text-lg leading-[30px] text-navy-100">Conte qual medicamento você procura e como prefere ser atendido. Retornamos pelo WhatsApp, e-mail ou telefone em até 1 dia útil.</p>
       </div>
       <div id="cotacao" class="scroll-mt-28 rounded-[20px] bg-surface p-6 shadow-xl sm:p-10">
         <h2 class="sr-only">Formulário de contato</h2>
@@ -41,7 +41,7 @@ const canais = [
       <div class="flex max-w-[616px] flex-col gap-5">
         <p class="eyebrow eyebrow-line">Atendimento</p>
         <h2 id="canais-t" class="h2 h2-lg">Outros canais oficiais de atendimento</h2>
-        <p>Escolha o canal que for mais fácil para você. Horário de atendimento: {SITE.hours || '[CONFIRMAR]'}.</p>
+        <p>Escolha o canal que for mais fácil para você. Horário de atendimento: {SITE.hours}.</p>
         <ul class="flex flex-col">
           {canais.map((c) => (
             <li class="flex items-center gap-4 border-b border-rule py-5 first:border-t">

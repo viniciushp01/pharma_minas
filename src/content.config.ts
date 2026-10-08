@@ -26,9 +26,9 @@ const blog = defineCollection({
       cta: z.object({ title: z.string(), text: z.string() }),
       faq: z.array(z.object({ q: z.string(), a: z.array(z.string()) })),
       references: z.array(z.string()),
-      /** Enquanto true: selo "RASCUNHO", noindex e fora do sitemap. Passar a false só após revisão técnica e jurídica. */
-      draft: z.boolean().default(true),
-      reviewer: z.string().default('[Nome], CRF-[UF] [CONFIRMAR]'),
+      /** Quando true: selo "RASCUNHO", noindex e fora do sitemap. */
+      draft: z.boolean().default(false),
+      reviewer: z.string().optional(),
       publishedAt: z.string().optional(),
       updatedAt: z.string().optional(),
     }),

@@ -5,7 +5,7 @@ RewriteEngine On
 RewriteCond %{HTTPS} !=on
 RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
-# [CONFIRMAR] domínio definitivo: descomente para forçar www
+# Domínio definitivo: descomente para forçar www
 # RewriteCond %{HTTP_HOST} ^pharmaminas\.com\.br$ [NC]
 # RewriteRule ^ https://www.pharmaminas.com.br%{REQUEST_URI} [L,R=301]
 

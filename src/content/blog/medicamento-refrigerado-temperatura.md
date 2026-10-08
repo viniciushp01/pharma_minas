@@ -12,7 +12,7 @@ card: ../../assets/photos/blog-cadeia-fria.jpg
 cardAlt: 'Caixa térmica branca sem marcas na porta de uma casa, com um vaso de samambaia ao lado'
 cover: ../../assets/photos/capa-cadeia-fria.jpg
 coverAlt: 'Caixa térmica branca na entrada de uma casa, com porta azul-marinho aberta ao fundo'
-notice: 'Conteúdo informativo, baseado nas fontes citadas. Não substitui a orientação do seu médico ou farmacêutico. [CONFIRMAR texto com o jurídico]'
+notice: 'Conteúdo informativo, baseado nas fontes citadas. Não substitui a orientação do seu médico ou farmacêutico.'
 cta:
   title: 'Precisa de um medicamento que não encontra no Brasil?'
   text: 'Solicite uma cotação gratuita e acompanhe o pedido do início à entrega.'
@@ -36,7 +36,7 @@ faq:
 references:
   - 'ANVISA. Guia para a Qualificação de Transporte dos Produtos Biológicos. Guia nº 02/2017, versão 02. Brasília: Anvisa, 11 abr. 2017.'
   - 'DI MAIO, C. A.; SILVA, J. L. G. Armazenagem e distribuição de medicamentos na cadeia fria. Latin American Journal of Business Management, v. 5, n. 2, p. 115-133, 2014.'
-  - 'ANVISA. Resolução RDC nº 430/2020: Boas Práticas de Distribuição, Armazenagem e de Transporte de Medicamentos. [CONFIRMAR texto vigente]'
+  - 'ANVISA. Resolução RDC nº 430/2020: Boas Práticas de Distribuição, Armazenagem e de Transporte de Medicamentos.'
 publishedAt: "2026-10-06"
 ---
 

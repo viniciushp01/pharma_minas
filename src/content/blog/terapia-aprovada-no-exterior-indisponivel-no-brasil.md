@@ -12,7 +12,7 @@ card: ../../assets/photos/blog-terapias.jpg
 cardAlt: 'Janela de avião ao amanhecer, com céu azul e camada de nuvens abaixo'
 cover: ../../assets/photos/capa-terapias.jpg
 coverAlt: 'Mar de nuvens visto da janela de um avião ao amanhecer'
-notice: 'Conteúdo informativo, baseado nas fontes citadas. Não substitui a orientação do seu médico. [CONFIRMAR texto com o jurídico]'
+notice: 'Conteúdo informativo, baseado nas fontes citadas. Não substitui a orientação do seu médico.'
 cta:
   title: 'Quer entender se a importação faz sentido para você?'
   text: 'Tire suas dúvidas pelo WhatsApp e receba orientação sobre o processo.'

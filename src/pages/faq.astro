@@ -5,11 +5,10 @@ import QuoteButton from '../components/QuoteButton.astro';
 import { SITE, hasWhatsApp, whatsappHref } from '../config';
 import { FAQ_GROUPS } from '../data/faq';
 
-const clean = (t: string) => t.replace(/\s*\[CONFIRMAR[^\]]*\]/g, '').trim();
 const jsonLd = [
   {
     '@context': 'https://schema.org', '@type': 'FAQPage',
-    mainEntity: FAQ_GROUPS.flatMap((g) => g.items).map((i) => ({ '@type': 'Question', name: i.q, acceptedAnswer: { '@type': 'Answer', text: clean(i.a) } })),
+    mainEntity: FAQ_GROUPS.flatMap((g) => g.items).map((i) => ({ '@type': 'Question', name: i.q, acceptedAnswer: { '@type': 'Answer', text: i.a } })),
   },
   {
     '@context': 'https://schema.org', '@type': 'BreadcrumbList',
@@ -23,7 +22,6 @@ const jsonLd = [
 <Base
   title="Perguntas frequentes sobre importação de medicamentos | Pharma Minas"
   description="Dúvidas comuns sobre como funciona a importação de medicamentos e quais documentos são necessários."
-  noindex
   {jsonLd}
 >
   <section class="on-dark bg-band py-14 lg:py-28" aria-labelledby="faq-h1">
