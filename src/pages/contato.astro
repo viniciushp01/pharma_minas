@@ -17,43 +17,45 @@ const canais = [
   description="Conte qual medicamento você procura e como prefere ser atendido. Retornamos pelo WhatsApp, e-mail ou telefone."
   jsonLd={[{ '@context': 'https://schema.org', '@type': 'ContactPage', name: 'Contato', url: `${SITE.url}/contato/` }]}
 >
-  <section class="on-dark bg-navy-900 py-12 lg:py-20" aria-labelledby="contato-h1">
+  <section class="on-dark bg-band py-14 lg:py-28" aria-labelledby="contato-h1">
     <div class="container-x grid grid-cols-[minmax(0,1fr)] items-start gap-10 lg:grid-cols-[560px_1fr] lg:gap-20">
       <div class="flex flex-col gap-5 lg:pt-4">
         <nav aria-label="Você está em" class="text-xs leading-4 text-navy-200">
           <ol class="flex items-center gap-2"><li><a href="/" class="underline-offset-2 hover:underline">Início</a></li><li aria-hidden="true">›</li><li aria-current="page" class="text-white">Contato</li></ol>
         </nav>
-        <h1 id="contato-h1" class="!text-white text-[32px] leading-[1.2] md:text-[44px] md:leading-[52px]">Precisa de ajuda para trazer o seu medicamento?</h1>
+        <h1 id="contato-h1" class="!text-white text-[32px] leading-[40px] lg:text-[56px] lg:leading-[64px]">Precisa de ajuda para trazer o seu medicamento?</h1>
         <p class="text-lg leading-[30px] text-navy-100">Conte qual medicamento você procura e como prefere ser atendido. Retornamos pelo WhatsApp, e-mail ou telefone [prazo de resposta: CONFIRMAR].</p>
       </div>
-      <div id="cotacao" class="scroll-mt-28 rounded-[20px] bg-white p-6 shadow-xl sm:p-10">
+      <div id="cotacao" class="scroll-mt-28 rounded-[20px] bg-surface p-6 shadow-xl sm:p-10">
         <h2 class="sr-only">Formulário de contato</h2>
         <QuoteForm id="contato" twoCols submitLabel="Enviar mensagem" origin="contato" />
       </div>
     </div>
   </section>
 
-  <section class="section bg-navy-50" aria-labelledby="canais-t">
-    <div class="container-x grid grid-cols-[minmax(0,1fr)] items-center gap-8 lg:grid-cols-[536px_1fr] lg:gap-16">
-      <Image src={atendimento} alt="Mulher sorrindo ao consultar o celular em sua mesa, com um caderno aberto, em um escritório claro" widths={[536, 1072]} sizes="(min-width:1024px) 536px, 100vw" loading="lazy" class="order-first aspect-[536/520] w-full rounded-[20px] object-cover max-lg:aspect-[350/240]" />
+  <section class="bg-tint py-[72px] lg:py-36" aria-labelledby="canais-t">
+    <div data-reveal class="container-x grid grid-cols-[minmax(0,1fr)] items-center gap-8 lg:grid-cols-[536px_1fr] lg:gap-16">
+      <div class="photo order-first aspect-[536/520] w-full max-lg:aspect-[350/240]">
+        <Image src={atendimento} alt="Mulher sorrindo ao consultar o celular em sua mesa, com um caderno aberto, em um escritório claro" widths={[536, 1072]} sizes="(min-width:1024px) 536px, 100vw" loading="lazy" />
+      </div>
       <div class="flex max-w-[616px] flex-col gap-5">
-        <p class="eyebrow">Atendimento</p>
-        <h2 id="canais-t" class="h2">Outros canais oficiais de atendimento</h2>
+        <p class="eyebrow eyebrow-line">Atendimento</p>
+        <h2 id="canais-t" class="h2 h2-lg">Outros canais oficiais de atendimento</h2>
         <p>Escolha o canal que for mais fácil para você. Horário de atendimento: {SITE.hours || '[CONFIRMAR]'}.</p>
-        <ul class="flex flex-col gap-3">
+        <ul class="flex flex-col">
           {canais.map((c) => (
-            <li class="flex items-center gap-4 rounded-[12px] bg-white p-4">
-              <span class="icon-tile !h-10 !w-10 !rounded-[10px] !bg-gold-50"><Icon name={c.icon} size={20} /></span>
+            <li class="flex items-center gap-4 border-b border-rule py-5 first:border-t">
+              <Icon name={c.icon} size={20} class="text-icon-step" />
               <div class="flex min-w-0 flex-col [overflow-wrap:anywhere]">
-                <span class="text-xs font-medium leading-4 text-n-600">{c.label}</span>
+                <span class="text-xs font-medium leading-4 text-body">{c.label}</span>
                 {c.href
-                  ? <a href={c.href} class="font-semibold text-navy-900 hover:underline" {...(c.href.startsWith('http') ? { target: '_blank', rel: 'noopener noreferrer' } : {})}>{c.value}{c.href.startsWith('http') && <span class="sr-only"> (abre em nova aba)</span>}</a>
-                  : <span class="font-semibold text-navy-900">{c.value}</span>}
+                  ? <a href={c.href} class="font-semibold text-ink hover:underline" {...(c.href.startsWith('http') ? { target: '_blank', rel: 'noopener noreferrer' } : {})}>{c.value}{c.href.startsWith('http') && <span class="sr-only"> (abre em nova aba)</span>}</a>
+                  : <span class="font-semibold text-ink">{c.value}</span>}
               </div>
             </li>
           ))}
         </ul>
-        <p class="text-[15px] font-medium text-navy-900">Ainda com dúvidas? <a href="/faq" class="underline decoration-gold-500 decoration-2 underline-offset-4">Veja as perguntas frequentes.</a></p>
+        <p class="text-[15px] font-medium text-ink">Ainda com dúvidas? <a href="/faq" class="underline decoration-gold-500 decoration-2 underline-offset-4">Veja as perguntas frequentes.</a></p>
       </div>
     </div>
   </section>

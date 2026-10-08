@@ -60,14 +60,14 @@ const row = twoCols ? 'grid gap-5 sm:grid-cols-2' : 'contents';
 
     <div class="field">
       <div class="flex items-start gap-[10px]">
-        <input id={`${id}-lgpd`} name="lgpd" type="checkbox" required value="sim" class="mt-[2px] h-[18px] w-[18px] shrink-0 cursor-pointer rounded-[4px] border border-n-500 accent-navy-900" aria-describedby={`${id}-lgpd-err`} />
-        <label for={`${id}-lgpd`} class="!text-xs !font-normal !leading-4 text-n-600">Concordo com a <a href="/politica-de-privacidade" target="_blank" rel="noopener" class="underline decoration-gold-500 underline-offset-2">Política de Privacidade</a><span class="sr-only"> (abre em nova aba)</span> e com o tratamento dos meus dados de saúde (LGPD).</label>
+        <input id={`${id}-lgpd`} name="lgpd" type="checkbox" required value="sim" class="mt-[2px] h-[18px] w-[18px] shrink-0 cursor-pointer rounded-[4px] border border-line-strong accent-ink" aria-describedby={`${id}-lgpd-err`} />
+        <label for={`${id}-lgpd`} class="!text-xs !font-normal !leading-4 text-body">Concordo com a <a href="/politica-de-privacidade" target="_blank" rel="noopener" class="underline decoration-gold-500 underline-offset-2">Política de Privacidade</a><span class="sr-only"> (abre em nova aba)</span> e com o tratamento dos meus dados de saúde (LGPD).</label>
       </div>
       <p class="field-error" id={`${id}-lgpd-err`} data-error-for="lgpd"></p>
     </div>
 
     <div id={`${id}-status`} role="status" aria-live="polite" class="sr-only" data-status></div>
-    <div data-form-error hidden role="alert" class="rounded-[12px] border border-danger bg-[#fdf1f2] p-4 text-sm text-navy-900">
+    <div data-form-error hidden role="alert" class="rounded-[12px] border border-danger bg-danger-soft p-4 text-sm text-ink">
       <p class="font-semibold">Não conseguimos enviar o seu pedido agora.</p>
       <p class="mt-1">Seus dados continuam no formulário. Tente de novo em instantes ou fale com a gente por outro canal: <a class="underline" href={`mailto:${SITE.email}`}>{SITE.email}</a>.</p>
     </div>
@@ -81,9 +81,9 @@ const row = twoCols ? 'grid gap-5 sm:grid-cols-2' : 'contents';
   <div data-quote-success hidden tabindex="-1" class="flex flex-col gap-5 outline-none">
     <div>
       <h2 class="text-[28px] leading-[35px]" data-success-title>Recebemos o seu pedido</h2>
-      <p class="mt-[6px] text-sm text-n-600">Um atendente vai responder pelo WhatsApp ou e-mail que você informou. Enquanto isso, pode nos chamar a qualquer momento.</p>
+      <p class="mt-[6px] text-sm text-body">Um atendente vai responder pelo WhatsApp ou e-mail que você informou. Enquanto isso, pode nos chamar a qualquer momento.</p>
     </div>
-    <WhatsAppButton block />
-    {inModal && <button type="button" class="btn btn-ghost w-full" data-close-quote>Fechar</button>}
+    <WhatsAppButton block variant="outline" />
+    {inModal && <button type="button" class="btn btn-text w-full" data-close-quote>Fechar</button>}
   </div>
 </div>

@@ -3,15 +3,15 @@ import Base from '../layouts/Base.astro';
 import { SITE } from '../config';
 ---
 <Base title="Política de Privacidade (LGPD) | Pharma Minas" description="Como a Pharma Minas trata os dados pessoais e de saúde informados nos formulários do site." noindex>
-  <section class="bg-navy-50 py-12 lg:py-16">
+  <section class="bg-tint py-14 lg:py-24">
     <div class="container-x flex flex-col gap-4">
-      <p class="eyebrow">Legal</p>
+      <p class="eyebrow eyebrow-line">Legal</p>
       <h1 class="h-display">Política de Privacidade</h1>
-      <p class="rounded-[12px] border border-gold-500 bg-gold-50 p-4 text-sm text-navy-900" role="note"><strong>Rascunho para revisão jurídica.</strong> Este texto descreve o funcionamento atual do site e precisa ser validado por um profissional de proteção de dados antes da publicação. Itens marcados com [CONFIRMAR] dependem de informação da empresa.</p>
+      <p class="rounded-[12px] border border-gold-500 bg-warm p-4 text-sm text-ink" role="note"><strong>Rascunho para revisão jurídica.</strong> Este texto descreve o funcionamento atual do site e precisa ser validado por um profissional de proteção de dados antes da publicação. Itens marcados com [CONFIRMAR] dependem de informação da empresa.</p>
     </div>
   </section>
-  <section class="section bg-white">
-    <div class="container-x">
+  <section class="bg-page py-[72px] lg:py-36">
+    <div data-reveal class="container-x">
       <div class="prose-pm max-w-[760px]">
         <h2>1. Quem é o controlador dos dados</h2>
         <p>{SITE.legalName}, CNPJ {SITE.cnpj}. Contato para assuntos de privacidade: <a href={`mailto:${SITE.email}`}>{SITE.email}</a>. Encarregado (DPO): [CONFIRMAR nome e contato].</p>

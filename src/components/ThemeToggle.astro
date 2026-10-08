@@ -1,0 +1,34 @@
+---
+// Alterna entre tema claro e escuro (componente "Toggle de tema" do Figma).
+// <button role="switch">: aria-checked = tema escuro ligado. O estado é salvo em localStorage ("pm-theme").
+// Na primeira visita vale a preferência do sistema (prefers-color-scheme).
+import Icon from './Icon.astro';
+interface Props { class?: string }
+const { class: cls = '' } = Astro.props;
+---
+<button type="button" class={`theme-toggle ${cls}`} role="switch" aria-checked="false" aria-label="Modo escuro" data-theme-toggle>
+  <span class="tt-track" aria-hidden="true">
+    <span class="tt-knob"></span>
+    <span class="tt-icon tt-sun"><Icon name="light_mode" size={16} /></span>
+    <span class="tt-icon tt-moon"><Icon name="dark_mode" size={16} /></span>
+  </span>
+</button>
+<script>
+  const root = document.documentElement;
+  const toggles = document.querySelectorAll<HTMLButtonElement>('[data-theme-toggle]');
+  const KEY = 'pm-theme';
+  const COLORS = { light: '#ffffff', dark: '#000c18' };
+  function paint(dark: boolean) {
+    root.classList.toggle('dark', dark);
+    toggles.forEach((t) => t.setAttribute('aria-checked', String(dark)));
+    document.querySelector('meta[name="theme-color"]')?.setAttribute('content', dark ? COLORS.dark : COLORS.light);
+  }
+  function save(dark: boolean) { try { localStorage.setItem(KEY, dark ? 'dark' : 'light'); } catch { /* modo privado: segue sem salvar */ } }
+  function stored(): string | null { try { return localStorage.getItem(KEY); } catch { return null; } }
+  paint(root.classList.contains('dark'));
+  toggles.forEach((t) => t.addEventListener('click', () => { const dark = !root.classList.contains('dark'); paint(dark); save(dark); }));
+  // sem escolha salva, acompanha o sistema
+  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => { if (!stored()) paint(e.matches); });
+  // outras abas
+  window.addEventListener('storage', (e) => { if (e.key === KEY && e.newValue) paint(e.newValue === 'dark'); });
+</script>

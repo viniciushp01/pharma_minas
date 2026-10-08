@@ -29,7 +29,20 @@ const org = {
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#001830" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" content="#ffffff" />
+    <!-- anti-flash: aplica o tema salvo (ou o do sistema) antes da primeira pintura -->
+    <script is:inline>
+      (function () {
+        try {
+          var t = localStorage.getItem('pm-theme');
+          var dark = t ? t === 'dark' : window.matchMedia('(prefers-color-scheme: dark)').matches;
+          if (dark) document.documentElement.classList.add('dark');
+        } catch (e) {}
+        // Movimento: entrada das seções só quando o usuário não pediu menos animação (sem JS, tudo fica visível)
+        try { if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentElement.classList.add('reveal-ready'); } catch (e) {}
+      })();
+    </script>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <SEO {title} {description} {image} {noindex} {type} jsonLd={[org, ...jsonLd]} />
   </head>
@@ -42,5 +55,17 @@ const org = {
     <Footer />
     <WhatsAppFloat />
     <QuoteModal />
+    <script is:inline>
+      // Entrada das seções: fade + 12 px em 240 ms, uma vez. As etapas da home também desenham o filete (600 ms).
+      (function () {
+        var els = document.querySelectorAll('[data-reveal], .steps');
+        var show = function (el) { el.classList.add('is-in'); };
+        if (!('IntersectionObserver' in window)) { els.forEach(show); return; }
+        var io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (e) { if (e.isIntersecting) { show(e.target); io.unobserve(e.target); } });
+        }, { threshold: 0, rootMargin: '0px 0px -8% 0px' });
+        els.forEach(function (el) { io.observe(el); });
+      })();
+    </script>
   </body>
 </html>

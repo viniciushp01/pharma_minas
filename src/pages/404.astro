@@ -1,13 +1,26 @@
 ---
 import Base from '../layouts/Base.astro';
 ---
-<Base title="Página não encontrada | Pharma Minas" description="A página que você procura não existe." noindex>
-  <section class="section bg-navy-50">
-    <div class="container-x flex min-h-[50vh] flex-col items-start justify-center gap-5">
-      <p class="eyebrow">Erro 404</p>
-      <h1 class="h-display">Não encontramos esta página</h1>
-      <p class="lead max-w-[560px]">O endereço pode ter mudado ou ter sido digitado errado. Volte ao início ou veja os guias do blog.</p>
-      <div class="flex flex-col gap-3 sm:flex-row"><a href="/" class="btn btn-gold">Voltar ao início</a><a href="/blog" class="btn btn-ghost">Ver o blog</a></div>
+<Base title="Página não encontrada | Pharma Minas" description="A página que você procura não existe ou mudou de endereço." noindex>
+  <section class="bg-alt" aria-labelledby="e404-h1">
+    <div class="container-x flex min-h-[calc(100svh-64px)] flex-col items-center justify-center gap-4 py-16 text-center lg:min-h-[640px] lg:gap-5 lg:py-36">
+      <p class="eyebrow eyebrow-line">Erro 404</p>
+      <p class="font-display text-[112px] leading-[120px] text-accent lg:text-[168px] lg:leading-[176px]" aria-hidden="true">404</p>
+      <h1 id="e404-h1" class="h2 h2-lg">Página não encontrada</h1>
+      <p class="max-w-[640px] text-[15px] leading-6 lg:text-base lg:leading-[26px]">O endereço que você acessou não existe ou foi movido. Volte ao início ou escolha um dos caminhos abaixo.</p>
+      <div class="mt-2 flex w-full flex-col gap-3 sm:w-auto sm:flex-row sm:gap-4">
+        <a href="/" class="btn btn-gold">Voltar ao início</a>
+        <a href="/blog" class="btn btn-ghost">Ver o blog</a>
+      </div>
+      <nav aria-label="Páginas úteis" class="mt-2">
+        <ul class="flex flex-col items-center gap-1 text-sm leading-7 lg:flex-row lg:gap-x-5">
+          <li><a href="/faq" class="underline-offset-4 hover:underline">Perguntas frequentes</a></li>
+          <li aria-hidden="true" class="max-lg:hidden">·</li>
+          <li><a href="/contato" class="underline-offset-4 hover:underline">Contato</a></li>
+          <li aria-hidden="true" class="max-lg:hidden">·</li>
+          <li><a href="/politica-de-privacidade" class="underline-offset-4 hover:underline">Política de Privacidade</a></li>
+        </ul>
+      </nav>
     </div>
   </section>
 </Base>

@@ -55,9 +55,9 @@ const byline = [
 ];
 ---
 <Base title={d.seoTitle ?? `${d.title} | Pharma Minas`} description={d.metaDescription} image={cover.src} type="article" noindex={d.draft} {jsonLd}>
-  <header class="bg-white">
-    <div class="container-x flex flex-col gap-5 pb-8 pt-8 lg:pb-8 lg:pt-12">
-      <nav aria-label="Você está em" class="text-xs leading-4 text-n-600">
+  <header class="bg-page">
+    <div class="container-x flex flex-col gap-5 pb-8 pt-10 lg:pb-8 lg:pt-[72px]">
+      <nav aria-label="Você está em" class="text-xs leading-4 text-body">
         <ol class="flex flex-wrap items-center gap-x-2 gap-y-1">
           <li><a href="/" class="hover:underline">Início</a></li><li aria-hidden="true">›</li>
           <li><a href="/blog" class="hover:underline">Blog</a></li><li aria-hidden="true">›</li>
@@ -67,35 +67,37 @@ const byline = [
       </nav>
       <span class="chip-cat">{d.category}</span>
       <h1 class="h-display max-w-[960px]">{d.title}</h1>
-      <p class="text-sm leading-[22px] text-n-600">{byline.join('  ·  ')}</p>
+      <p class="text-sm leading-[22px] text-body">{byline.join('  ·  ')}</p>
     </div>
     <div class="container-x pb-8 lg:pb-12">
-      <Image src={d.cover} alt={d.coverAlt} widths={[640, 1200, 1514]} sizes="(min-width:1280px) 1200px, 100vw" loading="eager" fetchpriority="high" class="aspect-[1200/380] w-full rounded-[20px] object-cover max-md:aspect-[16/9]" />
+      <div class="photo aspect-[1200/380] w-full max-md:aspect-[16/9]">
+        <Image src={d.cover} alt={d.coverAlt} widths={[640, 1200, 1514]} sizes="(min-width:1280px) 1200px, 100vw" loading="eager" fetchpriority="high" />
+      </div>
     </div>
   </header>
 
-  <div class="container-x grid gap-8 pb-12 lg:grid-cols-[280px_1fr] lg:gap-16 lg:pb-16">
+  <div data-reveal class="container-x grid gap-8 pb-12 lg:grid-cols-[280px_1fr] lg:gap-16 lg:pb-16">
     <aside class="lg:sticky lg:top-[125px] lg:self-start" aria-label="Neste artigo">
-      <details class="group rounded-[20px] border border-n-200 bg-n-50 p-6 max-lg:p-4" open>
-        <summary class="eyebrow flex cursor-pointer list-none items-center justify-between lg:pointer-events-none lg:cursor-default [&::-webkit-details-marker]:hidden">Neste artigo<Icon name="chevron_right" size={20} class="transition-transform group-open:rotate-90 lg:hidden" /></summary>
+      <details class="group rounded-[20px] border border-line bg-sunken p-6 max-lg:p-4" open>
+        <summary class="eyebrow flex cursor-pointer list-none items-center justify-between lg:pointer-events-none lg:cursor-default [&::-webkit-details-marker]:hidden"><span class="eyebrow-line">Neste artigo</span><Icon name="chevron_right" size={20} class="transition-transform group-open:rotate-90 lg:hidden" /></summary>
         <ol class="mt-3 flex flex-col gap-3">
           {toc.map((t) => (
-            <li><a href={`#${t.id}`} class="block text-sm leading-[22px] text-navy-900 hover:underline decoration-gold-500 underline-offset-4">{t.text}</a></li>
+            <li><a href={`#${t.id}`} class="block text-sm leading-[22px] text-ink hover:underline decoration-gold-500 underline-offset-4">{t.text}</a></li>
           ))}
         </ol>
       </details>
     </aside>
 
     <article class="flex max-w-[856px] flex-col gap-8">
-      <div class="rounded-[20px] bg-gold-50 p-6">
-        <p class="eyebrow">Resumo</p>
-        <p class="mt-2 text-navy-900">{d.summary}</p>
+      <div class="rounded-[20px] bg-warm p-6">
+        <p class="eyebrow eyebrow-line">Resumo</p>
+        <p class="mt-2 text-ink">{d.summary}</p>
       </div>
 
       <div class="prose-pm"><Content /></div>
 
-      <div class="flex gap-3 rounded-[12px] bg-navy-50 p-5 text-sm leading-[22px] text-navy-900" role="note">
-        <Icon name="info" size={24} class="text-gold-700" />
+      <div class="flex gap-3 rounded-[12px] bg-tint p-5 text-sm leading-[22px] text-ink" role="note">
+        <Icon name="info" size={24} class="text-icon-accent" />
         <p>{d.notice}</p>
       </div>
 
@@ -103,9 +105,9 @@ const byline = [
         <h2 id="perguntas-frequentes" class="text-[28px] leading-9 scroll-mt-24">Perguntas frequentes</h2>
         <div class="mt-5 flex flex-col gap-4">
           {d.faq.map((f) => (
-            <div class="rounded-[12px] border border-n-200 px-6 py-5">
-              <h3 class="font-sans text-base font-semibold leading-[26px] text-navy-900">{f.q}</h3>
-              <ul class="mt-[10px] list-disc space-y-1 pl-5 marker:text-gold-700">
+            <div class="rounded-[12px] border border-line px-6 py-5">
+              <h3 class="font-sans text-base font-semibold leading-[26px] text-ink">{f.q}</h3>
+              <ul class="mt-[10px] list-disc space-y-1 pl-5 marker:text-icon-accent">
                 {f.a.map((a) => <li>{a}</li>)}
               </ul>
             </div>
@@ -113,14 +115,14 @@ const byline = [
         </div>
       </section>
 
-      <section class="flex flex-col gap-4 rounded-[20px] bg-gold-100 p-6 sm:p-8" aria-labelledby="art-cta">
+      <section class="flex flex-col gap-4 rounded-[20px] bg-warm-strong p-6 sm:p-8" aria-labelledby="art-cta">
         <h2 id="art-cta" class="text-[28px] leading-9">{d.cta.title}</h2>
         <p>{d.cta.text}</p>
-        <div class="flex flex-col gap-3 sm:flex-row sm:gap-4"><QuoteButton /><WhatsAppButton /></div>
+        <div class="flex flex-col gap-3 sm:flex-row sm:gap-4"><QuoteButton /><WhatsAppButton variant="outline" /></div>
       </section>
 
       <section aria-labelledby="referencias">
-        <h2 id="referencias" class="eyebrow scroll-mt-24 !text-sm">Referências</h2>
+        <h2 id="referencias" class="eyebrow eyebrow-line scroll-mt-24 !text-sm">Referências</h2>
         <ol class="mt-3 flex flex-col gap-3 text-sm leading-[22px]">
           {d.references.map((r) => <li>{r}</li>)}
         </ol>
@@ -133,9 +135,9 @@ const byline = [
     if (toc && window.matchMedia('(max-width: 1023px)').matches) toc.open = false;
   </script>
 
-  <section class="section bg-n-50" aria-labelledby="leia-tambem">
-    <div class="container-x flex flex-col gap-8">
-      <h2 id="leia-tambem" class="h2">Leia também</h2>
+  <section class="bg-alt py-[72px] lg:py-24" aria-labelledby="leia-tambem">
+    <div data-reveal class="container-x flex flex-col gap-8">
+      <h2 id="leia-tambem" class="h2 h2-lg">Leia também</h2>
       <div class="grid gap-6 md:grid-cols-2">
         {related.map((p) => <BlogCard post={p} />)}
       </div>

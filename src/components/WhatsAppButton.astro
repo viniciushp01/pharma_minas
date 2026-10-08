@@ -1,10 +1,13 @@
 ---
 import Icon from './Icon.astro';
 import { whatsappHref, hasWhatsApp } from '../config';
-interface Props { label?: string; class?: string; message?: string; block?: boolean }
-const { label = 'Consultar no WhatsApp', class: cls = '', message, block = false } = Astro.props;
+// variant "outline": botão secundário em contorno (usado dentro das seções da home; o verde fica só no botão flutuante).
+// onPhoto: contorno e texto brancos sobre a foto da hero.
+interface Props { label?: string; class?: string; message?: string; block?: boolean; variant?: 'solid' | 'outline'; onPhoto?: boolean }
+const { label = 'Consultar no WhatsApp', class: cls = '', message, block = false, variant = 'solid', onPhoto = false } = Astro.props;
 const href = whatsappHref(message);
+const look = variant === 'outline' ? `btn-outline ${onPhoto ? 'on-photo' : ''}` : 'btn-wa';
 ---
-<a href={href} class={`btn btn-wa ${block ? 'w-full' : ''} ${cls}`} data-whatsapp {...(hasWhatsApp ? { target: '_blank', rel: 'noopener noreferrer' } : {})}>
+<a href={href} class={`btn ${look} ${block ? 'w-full' : ''} ${cls}`} data-whatsapp {...(hasWhatsApp ? { target: '_blank', rel: 'noopener noreferrer' } : {})}>
   <Icon name="whatsapp" /> {label}{hasWhatsApp && <span class="sr-only"> (abre em nova aba)</span>}
 </a>

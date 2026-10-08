@@ -1,9 +1,9 @@
 ---
-interface Props { eyebrow: string; title: string; text?: string; class?: string; as?: 'h1' | 'h2' }
-const { eyebrow, title, text, class: cls = '', as: Tag = 'h2' } = Astro.props;
+interface Props { eyebrow: string; title: string; text?: string; class?: string; as?: 'h1' | 'h2'; big?: boolean }
+const { eyebrow, title, text, class: cls = '', as: Tag = 'h2', big = false } = Astro.props;
 ---
 <div class={`flex flex-col gap-3 ${cls}`}>
-  <p class="eyebrow">{eyebrow}</p>
-  <Tag class="h2">{title}</Tag>
+  <p class={big ? 'eyebrow eyebrow-line' : 'eyebrow'}>{eyebrow}</p>
+  <Tag class={big ? 'h2 h2-lg' : 'h2'}>{title}</Tag>
   {text && <p class="lead">{text}</p>}
 </div>

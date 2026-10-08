@@ -3,13 +3,13 @@ import QuoteForm from './QuoteForm.astro';
 import Icon from './Icon.astro';
 ---
 <dialog id="quote-modal" aria-labelledby="quote-modal-title" class="m-auto w-[min(560px,100vw)] max-w-none overflow-visible bg-transparent p-0 backdrop:bg-navy-900/70 max-md:m-0 max-md:h-[100dvh] max-md:max-h-none max-md:w-screen">
-  <div class="relative max-h-[calc(100dvh-32px)] overflow-y-auto rounded-[20px] bg-white p-6 shadow-2xl sm:p-10 max-md:h-full max-md:max-h-none max-md:rounded-none">
+  <div class="relative max-h-[calc(100dvh-32px)] overflow-y-auto rounded-[20px] bg-surface p-6 shadow-2xl sm:p-10 max-md:h-full max-md:max-h-none max-md:rounded-none">
     <div class="mb-5 flex items-start justify-between gap-4" data-modal-head>
       <div>
         <h2 id="quote-modal-title" class="text-[28px] leading-[35px]">Solicitar cotação</h2>
-        <p class="mt-[6px] text-sm text-n-600">Conte qual medicamento você procura. Um atendente responde pelo WhatsApp ou e-mail.</p>
+        <p class="mt-[6px] text-sm text-body">Conte qual medicamento você procura. Um atendente responde pelo WhatsApp ou e-mail.</p>
       </div>
-      <button type="button" data-close-quote class="ml-auto grid h-11 w-11 shrink-0 place-items-center rounded-lg bg-n-100 text-navy-900 hover:bg-n-200" aria-label="Fechar"><Icon name="close" size={22} /></button>
+      <button type="button" data-close-quote class="ml-auto grid h-11 w-11 shrink-0 place-items-center rounded-lg bg-sunken text-ink hover:bg-line" aria-label="Fechar"><Icon name="close" size={22} /></button>
     </div>
     <QuoteForm id="qm" inModal origin="modal" />
   </div>
