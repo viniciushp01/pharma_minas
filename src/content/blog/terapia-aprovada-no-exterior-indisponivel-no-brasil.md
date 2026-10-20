@@ -51,7 +51,7 @@ Uma pesquisa da Fifarma e da IQVIA, divulgada em 2025, indica que só 61% das 40
 
 - **Ordem dos pedidos:** no levantamento de Barreto e colegas, o pedido ao Brasil costuma chegar depois; a diferença mediana entre o pedido à FDA e à Anvisa foi de 255 dias.
 - **Prazo de análise:** a Anvisa levou, em mediana, 403 dias para decidir, contra 224 dias da FDA.
-- **Decisão de quem desenvolve o medicamento:** cabe à empresa decidir quando e onde pedir o registro. [Revisão técnica pendente]
+- **Decisão de quem desenvolve o medicamento:** cabe à empresa decidir quando e onde pedir o registro.
 - **Nem toda terapia aprovada fora é registrada aqui:** das 104 terapias do estudo, 68 foram aprovadas pela Anvisa.
 
 ## O que o paciente pode fazer nesse intervalo?

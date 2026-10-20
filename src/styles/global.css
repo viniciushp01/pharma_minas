@@ -1,4 +1,7 @@
 @import 'tailwindcss';
+/* não procurar classes na biblioteca de e-mail nem nos arquivos de configuração */
+@source not '../../public/api';
+@source not '../../config';
 @import '@fontsource/inter/latin-300.css';
 @import '@fontsource/inter/latin-400.css';
 @import '@fontsource/inter/latin-500.css';

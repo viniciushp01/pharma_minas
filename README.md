@@ -18,3 +18,15 @@ Website institucional da **Pharma Minas**, especializado em importação e distr
 - **[Material Symbols](https://fonts.google.com/icons)** — Biblioteca de ícones vetoriais em SVG (`@material-symbols/svg-400`).
 - **[Sharp](https://sharp.pixelplumbing.com/)** — Processamento e otimização automatizada de imagens para formato WebP.
 - **PHP** — Backend para processamento e validação de solicitações de cotação em ambiente Apache/cPanel.
+---
+
+## 📨 Recebimento do formulário
+
+Os formulários (home, contato e modal) enviam para `/api/cotacao.php`, que valida os dados e manda **um e-mail por pedido** para `compras@pharmaminas.com.br`, por SMTP autenticado (PHPMailer 6.10, já incluído em `public/api/lib/`).
+
+- **Senhas fora do site:** a configuração fica em `/home/USUARIO/pharmaminas-config/formulario.php`, um nível acima do `public_html`. Modelo em `config/formulario.exemplo.php`.
+- **Sem configuração**, o endpoint responde 501 e o site mostra a mensagem de erro com o e-mail alternativo (nunca finge que o pedido chegou).
+- **Proteções:** honeypot, tempo mínimo de preenchimento, validação no servidor e limite de 5 envios por IP a cada 10 minutos.
+- **Respostas:** 200 enviado · 422 dados inválidos · 429 muitos envios · 501 não configurado · 502 falha no SMTP (detalhe no `error_log` do PHP).
+- **Requisito:** PHP 8.1 ou superior.
+- **Próxima etapa possível:** gravar também em MySQL, com painel administrativo.

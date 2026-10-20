@@ -1,13 +1,12 @@
 # cPanel / Apache — copiar para a raiz do site (public_html) junto com o conteúdo de dist/
 RewriteEngine On
 
-# HTTPS obrigatório (o formulário coleta dados de saúde)
-RewriteCond %{HTTPS} !=on
-RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
-
-# Domínio definitivo: descomente para forçar www
-# RewriteCond %{HTTP_HOST} ^pharmaminas\.com\.br$ [NC]
-# RewriteRule ^ https://www.pharmaminas.com.br%{REQUEST_URI} [L,R=301]
+# Endereço único: https://pharmaminas.com.br (sem www). HTTPS obrigatório: o formulário coleta dados de saúde.
+# Qualquer acesso por http:// ou por www. é redirecionado (301) para o endereço oficial, num só salto.
+RewriteCond %{HTTPS} !=on [OR]
+RewriteCond %{HTTP_HOST} ^www\. [NC]
+RewriteCond %{HTTP_HOST} ^(?:www\.)?pharmaminas\.com\.br$ [NC]
+RewriteRule ^ https://pharmaminas.com.br%{REQUEST_URI} [L,R=301]
 
 ErrorDocument 404 /404.html
 DirectoryIndex index.html

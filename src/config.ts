@@ -7,8 +7,8 @@ export const SITE = {
   tagline: 'Importação de Medicamentos',
   legalName: 'PHARMA MINAS ASSESSORIA NA IMPORTACAO DE MEDICAMENTOS LTDA',
   cnpj: '62.024.527/0001-03',
-  // Endereço base (canonical, sitemap e imagem de pré-visualização). Hoje: Vercel. Para usar o domínio definitivo, defina PUBLIC_SITE_URL no build.
-  url: (import.meta.env.PUBLIC_SITE_URL as string | undefined) ?? 'https://pharma-minas.vercel.app',
+  // Endereço oficial (canonical, sitemap e imagem de pré-visualização). Para outro endereço (ex.: prévia na Vercel), defina PUBLIC_SITE_URL no build.
+  url: (import.meta.env.PUBLIC_SITE_URL as string | undefined) ?? 'https://pharmaminas.com.br',
   email: 'compras@pharmaminas.com.br',
   instagram: '@pharmaminas_',
   instagramUrl: 'https://www.instagram.com/pharmaminas_/',
@@ -22,7 +22,7 @@ export const SITE = {
   /** Texto exibido enquanto o número não existe. */
   phoneDisplay: '(31) 3201-8081',
   whatsappMessage: 'Olá! Gostaria de consultar sobre a importação de um medicamento.',
-  /** Endpoint que recebe o formulário (pendência técnica: ver /public/api/cotacao.php). */
+  /** Endpoint que recebe o formulário e envia por e-mail (ver /public/api/cotacao.php e /config/formulario.exemplo.php). */
   FORM_ENDPOINT: '/api/cotacao.php',
 };
 
@@ -35,6 +35,7 @@ export function whatsappHref(message: string = SITE.whatsappMessage): string {
 
 export const NAV = [
   { label: 'Início', href: '/' },
+  { label: 'Medicamentos', href: '/lista-de-medicamentos' },
   { label: 'Blog', href: '/blog' },
   { label: 'FAQ', href: '/faq' },
   { label: 'Contato', href: '/contato' },

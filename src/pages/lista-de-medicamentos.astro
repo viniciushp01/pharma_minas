@@ -1,0 +1,141 @@
+---
+import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
+import QuoteButton from '../components/QuoteButton.astro';
+import { SITE, hasWhatsApp, whatsappHref } from '../config';
+import { MEDICAMENTOS, groupByLetter } from '../data/medicamentos';
+
+const groups = groupByLetter();
+const available = new Set(groups.map((g) => g.letter));
+const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
+const total = MEDICAMENTOS.length;
+const slug = (l: string) => `letra-${l.toLowerCase()}`;
+
+const jsonLd = [
+  {
+    '@context': 'https://schema.org', '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Início', item: SITE.url },
+      { '@type': 'ListItem', position: 2, name: 'Lista de medicamentos', item: `${SITE.url}/lista-de-medicamentos/` },
+    ],
+  },
+];
+---
+<Base
+  title="Lista de medicamentos importados | Pharma Minas"
+  description="Consulte os medicamentos cuja importação para uso próprio a Pharma Minas pode assessorar, mediante receita médica."
+  {jsonLd}
+>
+  <section class="on-dark bg-band py-12 lg:py-20" aria-labelledby="med-h1">
+    <div class="container-x flex flex-col gap-5">
+      <nav aria-label="Você está em" class="text-xs leading-4 text-navy-200">
+        <ol class="flex items-center gap-2"><li><a href="/" class="underline-offset-2 hover:underline">Início</a></li><li aria-hidden="true">›</li><li aria-current="page" class="text-white">Lista de medicamentos</li></ol>
+      </nav>
+      <h1 id="med-h1" class="!text-white max-w-[760px] text-[32px] leading-[1.2] md:text-[44px] md:leading-[52px]">Lista de medicamentos</h1>
+      <p class="max-w-[760px] text-lg leading-[30px] text-navy-100">Medicamentos cuja importação para uso próprio podemos assessorar, mediante receita médica. Busque pelo nome ou navegue pelas letras do índice.</p>
+    </div>
+  </section>
+
+  <section class="section bg-page" aria-label="Medicamentos">
+    <div class="container-x flex flex-col gap-8 lg:gap-12">
+      <div class="flex gap-3 rounded-xl border border-gold-line bg-warm p-5 md:gap-4 md:px-7 md:py-6" role="note">
+        <Icon name="info" size={24} class="text-icon-accent" />
+        <div class="flex flex-col gap-1.5">
+          <p class="text-[15px] font-semibold leading-[22px] text-ink">Aviso importante</p>
+          <p class="text-sm leading-[22px] text-body md:text-[15px] md:leading-6">A Pharma Minas não vende, não revende e não oferece diretamente nenhum dos medicamentos listados. A lista indica apenas os medicamentos cuja importação podemos assessorar, mediante receita médica válida e os demais documentos exigidos.</p>
+        </div>
+      </div>
+
+      <div class="flex flex-col gap-4 lg:gap-6">
+        <div class="flex flex-col gap-3 md:flex-row md:items-center md:justify-between md:gap-6">
+          <div class="relative w-full md:max-w-[560px]">
+            <label for="med-busca" class="sr-only">Buscar medicamento pelo nome</label>
+            <Icon name="search" size={20} class="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-body" />
+            <input id="med-busca" type="search" class="input !pl-12" placeholder="Buscar medicamento pelo nome" autocomplete="off" spellcheck="false" aria-controls="med-lista" />
+          </div>
+          <p id="med-contador" class="text-[13px] font-medium leading-[18px] text-body md:text-sm md:leading-5" aria-live="polite">{total} medicamentos</p>
+        </div>
+        <nav aria-label="Índice alfabético" class="-mx-5 overflow-x-auto px-5 md:mx-0 md:px-0">
+          <ul class="flex w-max gap-1.5 md:w-auto md:flex-wrap">
+            {alphabet.map((l) => (
+              <li>
+                {available.has(l)
+                  ? <a href={`#${slug(l)}`} data-letter={l} class="grid h-10 w-10 place-items-center rounded-lg bg-sunken text-sm font-semibold text-ink transition-colors hover:bg-line aria-disabled:pointer-events-none aria-disabled:opacity-35">{l}</a>
+                  : <span aria-hidden="true" class="grid h-10 w-10 place-items-center rounded-lg bg-sunken text-sm font-semibold text-ink opacity-35">{l}</span>}
+              </li>
+            ))}
+          </ul>
+        </nav>
+      </div>
+
+      <div id="med-lista" class="flex flex-col gap-9 lg:gap-12">
+        {groups.map((g) => (
+          <section id={slug(g.letter)} aria-labelledby={`h-${slug(g.letter)}`} class="flex scroll-mt-28 flex-col gap-2 lg:gap-3" data-group={g.letter}>
+            <div class="flex items-center gap-4">
+              <h2 id={`h-${slug(g.letter)}`} class="text-[28px] leading-9 !text-accent lg:text-[32px] lg:leading-10">{g.letter}</h2>
+              <span class="h-px flex-1 bg-line" aria-hidden="true"></span>
+              <span class="text-[13px] font-medium text-muted" data-group-count>{g.items.length}</span>
+            </div>
+            <ul class="grid grid-cols-2 gap-x-4 md:grid-cols-3 lg:grid-cols-4 lg:gap-x-6">
+              {g.items.map((m) => (
+                <li data-med={m} class="flex min-h-11 items-center border-b border-line py-2.5 text-sm font-medium leading-[22px] text-ink [overflow-wrap:anywhere] lg:min-h-12 lg:text-[15px]">{m}</li>
+              ))}
+            </ul>
+          </section>
+        ))}
+      </div>
+
+      <div id="med-vazio" hidden class="flex flex-col items-center gap-4 rounded-2xl bg-tint px-5 py-10 text-center md:px-10 md:py-16">
+        <Icon name="search" size={40} class="text-icon-accent" />
+        <h2 class="text-2xl leading-8 md:text-[28px] md:leading-9">Nenhum medicamento encontrado</h2>
+        <p class="max-w-[560px] text-base leading-6 text-body">Não encontramos “<span id="med-termo"></span>” na lista. Isso não significa que a importação seja impossível: fale com a nossa equipe e verificamos para você.</p>
+        <QuoteButton class="max-sm:w-full" />
+      </div>
+    </div>
+  </section>
+
+  <section class="section bg-warm-strong" aria-labelledby="med-cta">
+    <div class="container-x flex flex-col items-center gap-4 text-center">
+      <p class="eyebrow">Não encontrou?</p>
+      <h2 id="med-cta" class="h2">Não encontrou o seu medicamento?</h2>
+      <p class="lead max-w-[640px]">A lista não esgota as possibilidades. Conte qual medicamento você procura e nossa equipe verifica a importação para o seu caso.</p>
+      <div class="flex w-full flex-col gap-3 sm:w-auto sm:flex-row sm:justify-center sm:gap-4"><QuoteButton /><a href={whatsappHref()} class="btn btn-ghost" data-whatsapp {...(hasWhatsApp ? { target: '_blank', rel: 'noopener noreferrer' } : {})}>Consultar no WhatsApp{hasWhatsApp && <span class="sr-only"> (abre em nova aba)</span>}</a></div>
+    </div>
+  </section>
+</Base>
+<script>
+  const input = document.getElementById('med-busca') as HTMLInputElement;
+  const counter = document.getElementById('med-contador')!;
+  const empty = document.getElementById('med-vazio')!;
+  const term = document.getElementById('med-termo')!;
+  const list = document.getElementById('med-lista')!;
+  const groups = [...document.querySelectorAll<HTMLElement>('[data-group]')];
+  const letters = [...document.querySelectorAll<HTMLAnchorElement>('[data-letter]')];
+  const total = document.querySelectorAll('[data-med]').length;
+  // ignora acentos, maiúsculas, ® e separadores (ex.: "puri nethol" acha "PURI-NETHOL")
+  const norm = (s: string) => s.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().replace(/[^a-z0-9]/g, '');
+
+  function apply() {
+    const q = norm(input.value);
+    let shown = 0;
+    for (const g of groups) {
+      let n = 0;
+      g.querySelectorAll<HTMLElement>('[data-med]').forEach((li) => {
+        const ok = !q || norm(li.dataset.med!).includes(q);
+        li.hidden = !ok;
+        if (ok) n++;
+      });
+      g.hidden = n === 0;
+      g.querySelector('[data-group-count]')!.textContent = String(n);
+      const a = letters.find((x) => x.dataset.letter === g.dataset.group);
+      if (a) { if (n === 0) { a.setAttribute('aria-disabled', 'true'); a.tabIndex = -1; } else { a.removeAttribute('aria-disabled'); a.removeAttribute('tabindex'); } }
+      shown += n;
+    }
+    list.hidden = shown === 0;
+    empty.hidden = shown !== 0;
+    term.textContent = input.value.trim();
+    counter.textContent = !q ? `${total} medicamentos` : shown === 1 ? '1 medicamento encontrado' : `${shown} medicamentos encontrados`;
+  }
+  input.addEventListener('input', apply);
+  if (input.value) apply(); // valor restaurado pelo navegador ao voltar
+</script>
